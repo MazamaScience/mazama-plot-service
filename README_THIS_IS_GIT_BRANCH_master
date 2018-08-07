@@ -1,0 +1,6 @@
+git branch -a
+
+git branch
+
+git checkout master
+

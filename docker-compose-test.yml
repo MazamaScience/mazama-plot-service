@@ -1,0 +1,23 @@
+v4version: '2'
+services:
+  web:
+    restart: unless-stopped
+    container_name: plot-service-test
+    image: plot-service-test
+    networks:
+      - custom
+    ports:
+    - "6639:6639"
+    volumes:
+      - /var/log/plot-service/test/app:/app/logs
+      - /data/monitoring/latest/RData:/app/data
+
+networks:
+  custom:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.66.39.0/24
+          gateway: 172.66.39.1
+
