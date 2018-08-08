@@ -46,7 +46,7 @@ for (file in utilFiles) {
 
 # Specify global (configurable) variables -------------------------------------
 
-VERSION <- "0.1.1" # 0 . server-load . first working version
+VERSION <- "1.0.0" # first version . server-load . first working version
 
 # Set up configurable variables
 

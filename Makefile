@@ -1,18 +1,20 @@
 ################################################################################
 # Makefile for building and running docker containers
 #
-# ProxypPass settings are be defined in: /etc/apache2/sites-available/default-ssl.conf
+# On joule, ProxypPass settings are be defined in:
 #
-# # 6630-6639 plot-service -----------------------------------------------------
-# # 6631 -- v1 operational
-# # 6639 -- test (development)
-# ProxyPass /plot-service/v1 http://127.0.0.1:6631/plot-service/v1
-# ProxyPassReverse /plot-service/v1 http://127.0.0.1:6631/plot-service/v1
-# ProxyPass /plot-service/test http://127.0.0.1:6639/plot-service/test
-# ProxyPassReverse /plot-service/test http://127.0.0.1:6639/plot-service/test
+#   /etc/httpd/conf.d/tools.mazamascience.com.conf
 #
-# Test these settings with:    sudo apache2ctl configtest
-# Reload these settings with:  sudo service apache2 reload
+# # 6000-6009 plot-service -----------------------------------------------------
+# # 6001 -- v1 operational
+# # 6009 -- test (development)
+# ProxyPass /plot-service/v1 http://127.0.0.1:6001/plot-service/v1
+# ProxyPassReverse /plot-service/v1 http://127.0.0.1:6001/plot-service/v1
+# ProxyPass /plot-service/test http://127.0.0.1:6009/plot-service/test
+# ProxyPassReverse /plot-service/test http://127.0.0.1:6009/plot-service/test
+#
+# Test these settings with:    <CentOS equivalent of "sudo apache2ctl configtest">
+# Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
 
 # NOTE:  The SERVICE_PATH should match that found in Dockerfile and Dockerfile-test
 SERVICE_PATH=plot-service/v1
@@ -28,13 +30,13 @@ desktop_build:
 	cd plot-service; docker build -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
 
 desktop_up:
-	docker-compose -f docker-compose-desktop.yml -p monitorplotdesktop up -d
+	docker-compose -f docker-compose-desktop.yml -p plotservicedesktop up -d
 
 desktop_down:
-	docker-compose -f docker-compose-desktop.yml -p monitorplotdesktop down
+	docker-compose -f docker-compose-desktop.yml -p plotservicedesktop down
 
 desktop_container_logs:
-	docker-compose -f docker-compose-desktop.yml -p monitorplotdesktop logs -f
+	docker-compose -f docker-compose-desktop.yml -p plotservicedesktop logs -f
 
 desktop_bounce: desktop_down desktop_up
 
@@ -48,13 +50,13 @@ test_build:
 	cd plot-service; docker build -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
 
 test_up:
-	docker-compose -f docker-compose-test.yml -p monitorplottest up -d
+	docker-compose -f docker-compose-test.yml -p plotservicetest up -d
 
 test_down:
-	docker-compose -f docker-compose-test.yml -p monitorplottest down
+	docker-compose -f docker-compose-test.yml -p plotservicetest down
 
 test_container_logs:
-	docker-compose -f docker-compose.yml -p monitorplottest logs
+	docker-compose -f docker-compose.yml -p plotservicetest logs
 
 test_trace_log:
 	cat /var/log/$(SERVICE_PATH_TEST)/app/TRACE.log
@@ -80,13 +82,13 @@ production_build:
 	cd plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
 
 production_up:
-	docker-compose -f docker-compose-v1.yml -p monitorplotv1 up -d
+	docker-compose -f docker-compose-v1.yml -p plotservicev1 up -d
 
 production_down:
-	docker-compose -f docker-compose-v1.yml -p monitorplotv1 down
+	docker-compose -f docker-compose-v1.yml -p plotservicev1 down
 
 production_container_logs:
-	docker-compose -f docker-compose-v1.yml -p monitorplotv1 logs
+	docker-compose -f docker-compose-v1.yml -p plotservicev1 logs
 
 production_trace_log:
 	cat /var/log/$(SERVICE_PATH)/app/TRACE.log
