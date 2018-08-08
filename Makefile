@@ -25,7 +25,7 @@ VERSION=1.0.0
 # NOTE:  DESKTOP reuses Dockerfile-test but has a separate docker-compse-desktop.yml
 desktop_build:
 	-mkdir plot-service/output
-	cd plot-service; docker build -t plot-service-desktop:v$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
+	cd plot-service; docker build -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
 
 desktop_up:
 	docker-compose -f docker-compose-desktop.yml -p monitorplotdesktop up -d
@@ -45,7 +45,7 @@ desktop_reboot: desktop_down desktop_build desktop_up
 
 test_build:
 	-mkdir plot-service/output
-	cd plot-service; docker build -t plot-service-test:v$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
+	cd plot-service; docker build -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
 
 test_up:
 	docker-compose -f docker-compose-test.yml -p monitorplottest up -d
@@ -77,7 +77,7 @@ test_reboot: test_down test_build test_up
 
 production_build:
 	-mkdir plot-service/output
-	cd plot-service; docker build -t plot-service-v1:v$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
+	cd plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
 
 production_up:
 	docker-compose -f docker-compose-v1.yml -p monitorplotv1 up -d
