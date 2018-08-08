@@ -28,10 +28,8 @@ suppressPackageStartupMessages({
   library(MazamaWebUtils)         # cache management
   library(digest)                 # creation of uniqueID
   library(stringr)                # manipulation of data in InfoList
-  
-  library(PWFSLSmoke)             # workhorse package for everything smoke
-  #   related. Includes magrittr and dplyr
-  library(PWFSLSmokePlots)        # Custom plots for ws_monitor data
+  library(dplyr)                  # dataframe manipulations
+  library(ggplot2)                # plotting
 })
 
 # Load all shared utility functions
@@ -144,7 +142,7 @@ jug() %>%
   # regex matches zero or one final '/'
   get(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
 
-    logger.info("----- %s -----", SERVICE_PATH)
+    logger.info("----- %s -----", req$path)
 
     json <- jsonlite::toJSON(
       createAPIList(SERVICE_PATH, VERSION),
@@ -161,8 +159,8 @@ jug() %>%
   # regex ignores capitalization and matches zero or one final '/'
   get(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
 
-    logger.info("----- %s/api -----", SERVICE_PATH)
-
+    logger.info("----- %s -----", req$path)
+    
     json <- jsonlite::toJSON(
       createAPIList(SERVICE_PATH, VERSION),
       pretty = TRUE,

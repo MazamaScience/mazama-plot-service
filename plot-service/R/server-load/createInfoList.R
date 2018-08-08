@@ -77,16 +77,17 @@ createInfoList <- function(req = NULL,
   # NOTE:  enddate is specified here for creating the uniqueList. Enddate for plotting is specified
   # NOTE:  in the plotting function using localTime to set the default.
 
-  infoList$enddate <-
-    ifelse(
-      is.null(infoList$enddate),
-      strftime(lubridate::now(tzone = "UTC"), format = "%Y%m%d%H%M", tz = "UTC"),
-      infoList$enddate
-    )
-
-  endtime <- parseDatetime(infoList$enddate)
-  starttime <- endtime - lubridate::ddays(infoList$lookbackdays)
-  infoList$startdate <- strftime(starttime, format = "%Y%m%d%H%M", tz = "UTC")
+  if ( is.null(infoList$enddate) ) {
+    infoList$enddate <- strftime(lubridate::now(tzone = "UTC"), format = "%Y%m%d%H%M", tz = "UTC")
+  }
+  
+  if ( is.null(infoList$startdate) ) {
+    endtime <- lubridate::parse_date_time(infoList$enddate, orders=c("ymd","ymdH","ymdHM","ymdHMS"), truncated=3)
+    starttime <- endtime - lubridate::ddays(infoList$lookbackdays)
+    infoList$startdate <- strftime(starttime, format = "%Y%m%d%H%M", tz = "UTC")
+  }
+  
+  # TODO:  Could validate times and order at this point
 
   # ----- Create uniqueID based on parameters that affect the presentation ----
 
@@ -100,7 +101,7 @@ createInfoList <- function(req = NULL,
     infoList$serverid,
     infoList$ymax,
     infoList$lookbackdays,
-    strftime(lubridate::now(), "%Y%m%d%H%M"))
+    strftime(lubridate::now(), "%Y-%m-%d %H:%M"))
 
   infoList$uniqueID <- digest::digest(uniqueList, algo = "md5")
 

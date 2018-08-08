@@ -33,7 +33,7 @@ desktop_up:
 desktop_down:
 	docker-compose -f docker-compose-desktop.yml -p monitorplotdesktop down
 
-desktop_logs:
+desktop_container_logs:
 	docker-compose -f docker-compose-desktop.yml -p monitorplotdesktop logs -f
 
 desktop_bounce: desktop_down desktop_up
