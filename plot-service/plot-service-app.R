@@ -48,7 +48,7 @@ for (file in utilFiles) {
 
 # Specify global (configurable) variables -------------------------------------
 
-VERSION <- "1.1.4" # 1 . dailyhourlybarplot . uptime plot now displays free_memmory
+VERSION <- "0.1.1" # 0 . server-load . first working version
 
 # Set up configurable variables
 
@@ -187,7 +187,7 @@ jug() %>%
   # NOTE:  run for every custom product.
 
   # regex matches alphanumerics and zero or one final '/'
-  get(paste0("/", SERVICE_PATH, "/[[:alnum:]]+/?"), function(req, res, err) {
+  get(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
 
     # Extract lowercase subservice name
     subservice <-

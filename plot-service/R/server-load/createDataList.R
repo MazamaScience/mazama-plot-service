@@ -1,5 +1,5 @@
 ########################################################################
-# uptime/createDataList.R
+# server-load/createDataList.R
 #
 # Create a list of data needed to generate the product.
 #
@@ -8,7 +8,7 @@
 
 createDataList <- function(infoList = NULL, dataDir = NULL) {
 
-  logger.trace("----- createDataList() -----")
+  logger.debug("----- server-load/createDataList() -----")
 
   if (is.null(infoList)) stop(paste0("Required parameter 'infoList' is missing."), call. = FALSE)
 
@@ -27,7 +27,7 @@ createDataList <- function(infoList = NULL, dataDir = NULL) {
   uptimeData = NULL
   
   result <- try({
-    uptimeLogUrl <- paste0('https://', serverID, '.airfire.org/logs/uptime.log')
+    uptimeLogUrl <- paste0('http://', serverID, '/logs/uptime.log')
     
     # Instead, load the data as lines for further parsing
     lines <- readr::read_lines(uptimeLogUrl)
@@ -76,7 +76,7 @@ createDataList <- function(infoList = NULL, dataDir = NULL) {
   memoryData = NULL
   
   result <- try({
-    memoryLogUrl <- paste0('https://', serverID, '.airfire.org/logs/free_memory.log')
+    memoryLogUrl <- paste0('http://', serverID, '/logs/free_memory.log')
     col_names <- c('datetime','dummy','total','used','free','shared','buff_cache','available')
     memoryData <- readr::read_fwf(memoryLogUrl, readr::fwf_empty(memoryLogUrl, col_names=col_names))
     memoryData$dummy <- NULL

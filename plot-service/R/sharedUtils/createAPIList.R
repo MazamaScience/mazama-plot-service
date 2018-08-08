@@ -21,7 +21,7 @@ createAPIList <- function(name=NULL, version=NULL) {
       "server-load" = list(
         method = "GET",
         params = list(
-          serverid = "<url> [default = 'joule.mazamascience.com']",
+          serverid = "host name [default = 'joule.mazamascience.com']",
           ymax = "y-axis maximum [default = 1000]",
           width =  "width of the graphic in given units [default = 10]",
           height = "height of the graphic in given units [default = 6]",

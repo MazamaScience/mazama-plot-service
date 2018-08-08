@@ -1,5 +1,5 @@
 ########################################################################
-# uptime/createInfoList.R
+# server-load/createInfoList.R
 #
 # Create an infoList from a jug request object.
 #
@@ -33,7 +33,7 @@ if ( FALSE ) {
 createInfoList <- function(req = NULL,
                            cacheDir = NULL) {
 
-  logger.trace("----- createInfoList() -----")
+  logger.debug("----- server-load/createInfoList() -----")
 
   if (is.null(req)) stop(paste0("Required parameter 'req' is missing."), call. = FALSE)
   if (is.null(cacheDir)) stop(paste0("Required parameter 'cacheDir' is missing."), call. = FALSE)
@@ -51,7 +51,7 @@ createInfoList <- function(req = NULL,
   # ----- Set parameter defaults ----------------------------------------------
 
   # Set defaults
-  infoList$serverid <- tolower(ifelse(is.null(infoList$serverid), "tools-c3", infoList$serverid))
+  infoList$serverid <- tolower(ifelse(is.null(infoList$serverid), "joule.mazamascience.com", infoList$serverid))
   # NOTE:  During plotting, ymax will take the maximum of the data maximum or infoList$ymax
   # NOTE:  We default to a small number so that data maximum will be used unless the users specifies something larger
   infoList$ymax <- ifelse(is.null(infoList$ymax), .01, as.numeric(infoList$ymax))
@@ -74,10 +74,6 @@ createInfoList <- function(req = NULL,
   if (!infoList$units %in% c("in", "cm", "mm")) { stop("invalid units", call. = FALSE) }
   if (infoList$lookbackdays < 2 ) { infoList$lookbackdays <- 2 }
 
-  # TODO:  Sort out what's going on with startdate, enddate, in this next chunk.
-  # TODO:  Shouldn't enddate, perhaps in string format, be part of infoList?
-  # TODO:  Don't we need to include the hour so that this plot gets regenerated once per hour
-
   # NOTE:  enddate is specified here for creating the uniqueList. Enddate for plotting is specified
   # NOTE:  in the plotting function using localTime to set the default.
 
@@ -89,9 +85,8 @@ createInfoList <- function(req = NULL,
     )
 
   endtime <- parseDatetime(infoList$enddate)
-  starttime <- endtime - lubridate::days(infoList$lookbackdays)
+  starttime <- endtime - lubridate::ddays(infoList$lookbackdays)
   infoList$startdate <- strftime(starttime, format = "%Y%m%d%H%M", tz = "UTC")
-  infoList$tlim <- c(infoList$startdate, infoList$enddate)
 
   # ----- Create uniqueID based on parameters that affect the presentation ----
 

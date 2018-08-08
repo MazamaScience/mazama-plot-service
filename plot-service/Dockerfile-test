@@ -1,11 +1,12 @@
-FROM mazamascience/pwfslsmoke:v1.0.20
+FROM rocker/tidyverse:3.5.1
 MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
 
 #######################################################################
-# For the monitor-plot app
+# For the monitor-custom app
 RUN install2.r --error \
     jug \
-    MazamaWebUtils
+    MazamaWebUtils \
+    ggthemes
 
 #######################################################################
 # jug instance configuration
@@ -13,29 +14,29 @@ RUN install2.r --error \
 # ProxyPass settings are defined in:  /etc/apache2/sites-enabled/default-ssl.conf
 # 
 # On haze, we will adopt following protocol for ProxyPass settings:
-#  * all monitoring services will be on ports in the range 6600-6699
-#  * each unique service will have a block of ports from 66#0-66#9
-#  * port 66#0 is reserved for the "latest" version
-#  * port 66#X is reseved for version X of a service
-#  * port 66#9 is reserved for a "test" version
+#  * all monitoring services will be on ports in the range 6000-6099
+#  * each unique service will have a block of ports from 60#0-60#9
+#  * port 60#0 is reserved for the "latest" version
+#  * port 60#X is reseved for version X of a service
+#  * port 60#9 is reserved for a "test" version
 #
-# The block of ports 6630-6639 is reserved for the 'monitor-plot' service
+# The block of ports 6000-6009 is reserved for the 'plot-service' service
 ENV JUG_HOST 0.0.0.0
-ENV JUG_PORT 6639
+ENV JUG_PORT 6009
 
-EXPOSE 6639
+EXPOSE 6009
 
 #######################################################################
 # app
 #
-# Setup for haze.airfire.org
+# Setup for docker.mazamascience.com
 
 # Environment variables ---------------
 
 # path and cache (see apache ProxyPass settings)
-ENV SERVICE_PATH monitor-plot/test
+ENV SERVICE_PATH plot-service/test
 ENV CACHE_DIR output
-ENV CACHE_SIZE 100
+ENV CACHE_SIZE 10
 
 # mounted directories
 ENV DATA_DIR /app/data
@@ -46,11 +47,10 @@ ENV LOG_DIR /app/logs
 WORKDIR /app
 
 # jug app and all associated files
-COPY monitor-plot-app.R /app
+COPY plot-service-app.R /app
 COPY output /app/output
 COPY R /app/R
-COPY UI /app/UI
 
 # Start the jug app when the image starts up
-CMD [ "Rscript", "/app/monitor-plot-app.R" ]
+CMD [ "Rscript", "/app/plot-service-app.R" ]
 

@@ -1,4 +1,4 @@
-# monitor-plot #
+# plot-service #
 
 This directory contains a dockerizable webservice that runs R
 code and returns various types of plots of data at a single monitor.
@@ -25,12 +25,12 @@ The basic files required for a product-only webservice (no UI) are the following
 ├── docker-compose-desktop.yml
 ├── docker-compose-test.yml
 ├── docker-compose.yml
-└── monitor-plot/
+└── plot-service/
     ├── Dockerfile
     ├── Dockerfile-test
     ├── R/
     ├── logs/
-    ├── monitor-plot-app.R
+    ├── plot-service-app.R
     └── output/
 ```
 
@@ -42,15 +42,15 @@ Outside of RStudio you must first:
 
 Inside RStudio you can run the app with:
 
- * `cd monitor-plot/`
+ * `cd plot-service/`
  * "Set As Working Directoroy"
- * open up `monitor-plot-app.R`
+ * open up `plot-service-app.R`
  * set breakpoints if desired
  * click the 'Source' button
 
 The app will be available at:
 
-[localhost:8080/monitor-plot/dev/](localhost:8080/monitor-plot/dev/)
+[localhost:8080/plot-service/dev/](localhost:8080/plot-service/dev/)
 
 ## Running the app with Docker ##
 
@@ -60,7 +60,7 @@ You can create and run a docker image with the app by:
  
 The app will be available at:
 
-[localhost:8080/monitor-plot/test/](localhost:8080/monitor-plot/test/)
+[localhost:8080/plot-service/test/](localhost:8080/plot-service/test/)
  
 The `Makefile` has targets for three different types of deployment: `desktop`, `test`, `operational`.
 
@@ -81,11 +81,11 @@ docker app must have a crontab to regularly copy latest data files.
 
 Log files will be written to a directory named after the deployment type:
 
-`/var/log/monitor-plot/test/app` or `/var/log/monitor-plot/operational/app`
+`/var/log/plot-service/test/app` or `/var/log/plot-service/operational/app`
 
 except for `desktop` which are written to:
 
-`monitor-plot/logs`
+`plot-service/logs`
 
 ### ProxyPass Settings ###
 
@@ -97,14 +97,14 @@ On the computer 'haze', ProxyPass settings are defined in:
 
 You can ask to see the `api`:
 
-[localhost:8080/monitor-plot/test/api](localhost:8080/monitor-plot/test/api)
+[localhost:8080/plot-service/test/api](localhost:8080/plot-service/test/api)
 
 You can ask for a `plot`:
 
-[localhost:8080/monitor-plot/test/plot?monitorid=530331011&plottype=timeseries](localhost:8080/monitor-plot/test/plot?monitorid=530331011&plottype=timeseries)
+[localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries](localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries)
 
 You can specify `responsetype=json` to have the service return a json response for use by javascript code in a user interface:
 
-[localhost:8080/monitor-plot/test/plot?monitorid=530331011&plottype=timeseries&responsetype=json](localhost:8080/monitor-plot/test/plot?monitorid=530331011&plottype=timeseries&responsetype=json)
+[localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries&responsetype=json](localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries&responsetype=json)
 
 ***
