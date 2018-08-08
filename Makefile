@@ -38,18 +38,10 @@ desktop_logs:
 
 desktop_bounce: desktop_down desktop_up
 
-desktop_reboot: desktop_down desktop_download_data desktop_build desktop_up
+desktop_reboot: desktop_down desktop_build desktop_up
 
 
 # TEST version -----------------------------------------------------------------
-
-test_configure_ui:
-	sed 's%__SERVICE_PATH__%$(SERVICE_PATH_TEST)%' \
-		plot-service/UI/__index.html > plot-service/UI/index.html
-	sed 's%__SERVICE_PATH__%$(SERVICE_PATH_TEST)%' \
-		plot-service/UI/dist/__dist.js > plot-service/UI/dist/dist.js
-	sed 's%__SERVICE_PATH__%$(SERVICE_PATH_TEST)%' \
-		plot-service/UI/dist/__dist.min.js > plot-service/UI/dist/dist.min.js
 
 test_build:
 	-mkdir plot-service/output
@@ -70,20 +62,18 @@ test_trace_log:
 test_debug_log:
 	cat /var/log/$(SERVICE_PATH_TEST)/app/DEBUG.log
 
+test_info_log:
+	cat /var/log/$(SERVICE_PATH_TEST)/app/INFO.log
+
+test_error_log:
+	cat /var/log/$(SERVICE_PATH_TEST)/app/ERROR.log
+
 test_bounce: test_down test_up
 
 test_reboot: test_down test_build test_up
 
 
 # PRODUCTION version ----------------------------------------------------------
-
-production_configure_ui:
-	sed 's%__SERVICE_PATH__%$(SERVICE_PATH)%' \
-		plot-service/UI/__index.html > plot-service/UI/index.html
-	sed 's%__SERVICE_PATH__%$(SERVICE_PATH)%' \
-		plot-service/UI/dist/__dist.js > plot-service/UI/dist/dist.js
-	sed 's%__SERVICE_PATH__%$(SERVICE_PATH)%' \
-		plot-service/UI/dist/__dist.min.js > plot-service/UI/dist/dist.min.js
 
 production_build:
 	-mkdir plot-service/output
@@ -103,6 +93,12 @@ production_trace_log:
 
 production_debug_log:
 	cat /var/log/$(SERVICE_PATH)/app/DEBUG.log
+
+production_info_log:
+	cat /var/log/$(SERVICE_PATH)/app/INFO.log
+
+production_error_log:
+	cat /var/log/$(SERVICE_PATH)/app/ERROR.log
 
 production_bounce: production_down production_up
 

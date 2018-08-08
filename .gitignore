@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 *.Rproj
+plot-service/logs/*
+plot-service/output/*

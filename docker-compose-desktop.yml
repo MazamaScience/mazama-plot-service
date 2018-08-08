@@ -5,7 +5,6 @@ services:
     container_name: plot-service-desktop
     image: plot-service-desktop
     ports:
-     - "8080:6639"
+      - "8080:6009"
     volumes:
       - ${PWD}/plot-service/logs:/app/logs
-      - ${PWD}/plot-service/data:/app/data
