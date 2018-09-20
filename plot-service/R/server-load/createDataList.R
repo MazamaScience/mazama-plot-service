@@ -60,6 +60,7 @@ createDataList <- function(infoList = NULL, dataDir = NULL) {
     uptimeData <-
       uptimeData %>%
       filter(datetime >= startDate)
+    
   }, silent = TRUE)
   
   # Create dummy data to use if the uptime log is unavailible 
