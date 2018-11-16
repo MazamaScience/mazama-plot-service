@@ -20,7 +20,8 @@
 SERVICE_PATH=plot-service/v1
 SERVICE_PATH_TEST=plot-service/test
 
-VERSION=1.0.0
+# ---- . ---- . updated to use MazamaCoreUtils
+VERSION=1.0.1
 
 # DESKTOP version -------------------------------------------------------------
 
