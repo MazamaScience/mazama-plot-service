@@ -1,7 +1,7 @@
 # plot-service #
 
 This directory contains a dockerizable webservice that runs R
-code and returns various types of plots of data at a single monitor.
+code and returns various types of plots.
 
 ## Reboot Instructions for an Operational Site
 
@@ -62,20 +62,13 @@ The app will be available at:
 
 [localhost:8080/plot-service/test/](localhost:8080/plot-service/test/)
  
-The `Makefile` has targets for three different types of deployment: `desktop`, `test`, `operational`.
+The `Makefile` has targets for three different types of deployment: `desktop`, 
+`test`, `operational`.
 
-A quick refresher on docker commands is available at the [docker cheatsheet](https://github.com/wsargent/docker-cheat-sheet).
+A quick refresher on docker commands is available at the 
+[docker cheatsheet](https://github.com/wsargent/docker-cheat-sheet).
 
 ## Host Computer Settings ##
-
-### Data Files ###
-
-Latest data .RData files are mounted from the following directory which must exist:
-
-`/data/monitoring/RData`
-
-Currently, data are being generated on 'haze' so any other computer hosting this
-docker app must have a crontab to regularly copy latest data files.
 
 ### Log Files ###
 
@@ -95,16 +88,13 @@ On the computer 'haze', ProxyPass settings are defined in:
 
 ## Testing the app ##
 
-You can ask to see the `api`:
+You can ask to see the `api` by hitting the service with no sub-service
+specified:
 
-[localhost:8080/plot-service/test/api](localhost:8080/plot-service/test/api)
+[http://localhost:8080/plot-service/dev](http://localhost:8080/plot-service/dev)
 
 You can ask for a `plot`:
 
-[localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries](localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries)
-
-You can specify `responsetype=json` to have the service return a json response for use by javascript code in a user interface:
-
-[localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries&responsetype=json](localhost:8080/plot-service/test/plot?monitorid=530331011&plottype=timeseries&responsetype=json)
+[http://localhost:8080/plot-service/dev/server-load?serverid=joule.mazamascience.com](http://localhost:8080/plot-service/dev/server-load?serverid=joule.mazamascience.com)
 
 ***

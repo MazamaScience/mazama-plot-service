@@ -1,7 +1,7 @@
 ################################################################################
 # Makefile for building and running docker containers
 #
-# On joule, ProxypPass settings are be defined in:
+# On joule, ProxypPass settings are defined in:
 #
 #   /etc/httpd/conf.d/tools.mazamascience.com.conf
 #

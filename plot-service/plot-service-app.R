@@ -25,7 +25,8 @@
 suppressPackageStartupMessages({
   library(methods)                # always included for Rscripts
   library(jug)                    # web service framework
-  library(MazamaWebUtils)         # cache management
+  library(MazamaCoreUtils)         # cache management
+  ###library(MazamaWebUtils)         # cache management
   library(digest)                 # creation of uniqueID
   library(stringr)                # manipulation of data in InfoList
   library(dplyr)                  # dataframe manipulations
@@ -218,7 +219,7 @@ jug() %>%
     if (!file.exists(infoList$plotPath)) {
 
       # Manage the cache
-      MazamaWebUtils::manageCache(CACHE_DIR, c("json", "png", "pdf")) # TODO:  Other potential output formats?
+      MazamaCoreUtils::manageCache(CACHE_DIR, c("json", "png", "pdf")) # TODO:  Other potential output formats?
 
       result <- try({
 

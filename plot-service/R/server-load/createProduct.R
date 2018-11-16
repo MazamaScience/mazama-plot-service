@@ -19,7 +19,7 @@ createProduct <- function(dataList = NULL, infoList = NULL, textList = NULL) {
   if (is.null(infoList)) stop(paste0("Required parameter 'infoList' is missing."), call. = FALSE)
   if (is.null(textList)) stop(paste0("Required parameter 'textList' is missing."), call. = FALSE)
   
-  # ----- get parameters ------------------------------------------------------
+  # ----- get parameters -------------------------------------------------------
   
   # Uptime data
   uptimeData <- dataList$uptimeData
@@ -35,7 +35,7 @@ createProduct <- function(dataList = NULL, infoList = NULL, textList = NULL) {
   # Memory data
   memoryData <- dataList$memoryData
   
-  # ----- Create plot ---------------------------------------------------------
+  # ----- Create plot ----------------------------------------------------------
   
   # TODO:  Clean up this debugging code. Shouldn't have "if (FALSE)" *inside* a function.
   # Determine what year(s) should be displayed on the x axis
@@ -98,7 +98,7 @@ createProduct <- function(dataList = NULL, infoList = NULL, textList = NULL) {
     
   }
   
-  # ----- Save plot -----------------------------------------------------------
+  # ----- Save plot ------------------------------------------------------------
   
   ggsave(
     plotPath,
@@ -110,4 +110,5 @@ createProduct <- function(dataList = NULL, infoList = NULL, textList = NULL) {
   )
   
   return(invisible())
+  
 }

@@ -5,20 +5,32 @@ MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
 # For the monitor-custom app
 RUN install2.r --error \
     jug \
-    MazamaWebUtils \
+#   MazamaCoreUtils \
+#   MazamaWebUtils \
     ggthemes
+
+# Install latest development versions of packages
+RUN installGithub.r \
+    MazamaScience/MazamaCoreUtils \
+    MazamaScience/MazamaWebUtils
 
 #######################################################################
 # jug instance configuration
 #
-# ProxyPass settings are defined in:  /etc/apache2/sites-enabled/default-ssl.conf
-# 
-# On haze, we will adopt following protocol for ProxyPass settings:
-#  * all monitoring services will be on ports in the range 6000-6099
-#  * each unique service will have a block of ports from 60#0-60#9
-#  * port 60#0 is reserved for the "latest" version
-#  * port 60#X is reseved for version X of a service
-#  * port 60#9 is reserved for a "test" version
+# On joule, ProxypPass settings are defined in:
+#
+#   /etc/httpd/conf.d/tools.mazamascience.com.conf
+#
+# # 6000-6009 plot-service -----------------------------------------------------
+# # 6001 -- v1 operational
+# # 6009 -- test (development)
+# ProxyPass /plot-service/v1 http://127.0.0.1:6001/plot-service/v1
+# ProxyPassReverse /plot-service/v1 http://127.0.0.1:6001/plot-service/v1
+# ProxyPass /plot-service/test http://127.0.0.1:6009/plot-service/test
+# ProxyPassReverse /plot-service/test http://127.0.0.1:6009/plot-service/test
+#
+# Test these settings with:    <CentOS equivalent of "sudo apache2ctl configtest">
+# Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
 #
 # The block of ports 6000-6009 is reserved for the 'plot-service' service
 ENV JUG_HOST 0.0.0.0
