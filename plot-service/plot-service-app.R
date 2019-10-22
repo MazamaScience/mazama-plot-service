@@ -31,6 +31,7 @@ suppressPackageStartupMessages({
   library(stringr)                # manipulation of data in InfoList
   library(dplyr)                  # dataframe manipulations
   library(ggplot2)                # plotting
+  library(beakr)
 })
 
 # Load all shared utility functions
@@ -136,12 +137,12 @@ logger.debug('LOG_DIR = %s', LOG_DIR)
 
 # ----- BEGIN jug app ---------------------------------------------------------
 
-jug() %>%
-
+#jug() %>%
+createBeakr() %>%
   # Return json dscription of this service ------------------------------------
 
   # regex matches zero or one final '/'
-  get(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
+  GET(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
 
     logger.info("----- %s -----", req$path)
 
@@ -149,7 +150,7 @@ jug() %>%
       createAPIList(SERVICE_PATH, VERSION),
       pretty = TRUE,
       auto_unbox = TRUE)
-    res$content_type("application/json")
+    res$setContentType("application/json")
 
     return(json)
 
@@ -158,16 +159,16 @@ jug() %>%
   # Return json dscription of this service ------------------------------------
 
   # regex ignores capitalization and matches zero or one final '/'
-  get(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
+  GET(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
 
     logger.info("----- %s -----", req$path)
-    
+
     json <- jsonlite::toJSON(
       createAPIList(SERVICE_PATH, VERSION),
       pretty = TRUE,
       auto_unbox = TRUE)
 
-    res$content_type("application/json")
+    res$setContentType("application/json")
 
     return(json)
 
@@ -181,12 +182,12 @@ jug() %>%
   # NOTE:   * createInfoList
   # NOTE:   * createProduct
   # NOTE:   * createTextList
-  # NOTE:  
+  # NOTE:
   # NOTE:  This standard protocol allows the following chunk of code to be
   # NOTE:  run for every custom product.
 
   # regex matches alphanumerics and zero or one final '/'
-  get(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
+  GET(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
 
     # Extract lowercase subservice name
     subservice <-
@@ -276,9 +277,9 @@ jug() %>%
       if (infoList$responsetype == "raw") {
 
         if (infoList$outputfiletype == "png") {
-          res$content_type("image/png")
+          res$setContentType("image/png")
         } else if (infoList$outputfiletype == "pdf") {
-          res$content_type("application/pdf")
+          res$setContentType("application/pdf")
         }
 
         return(readr::read_file_raw(infoList$plotPath))
@@ -286,7 +287,7 @@ jug() %>%
 
       } else if (infoList$responsetype == "json") {
 
-        res$content_type("application/json")
+        res$setContentType("application/json")
         return(readr::read_file(infoList$jsonPath))
 
       } else {
@@ -303,13 +304,13 @@ jug() %>%
 
   # Serve static files --------------------------------------------------------
 
-  serve_static_files(SERVICE_PATH) %>%
+  static(SERVICE_PATH) %>%
 
   # Error handling ------------------------------------------------------------
-  simple_error_handler_json() %>%
+  handleErrors() %>%
 
   # Return --------------------------------------------------------------------
-  serve_it(host = JUG_HOST, port = as.integer(JUG_PORT))
+  listen(host = JUG_HOST, port = as.integer(JUG_PORT))
 
 
 # ----- END jug app -----------------------------------------------------------

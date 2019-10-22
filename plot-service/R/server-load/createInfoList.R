@@ -12,20 +12,20 @@
 
 # DEBUGGING
 if ( FALSE ) {
-  
+
   library(MazamaWebUtils)
   logger.setup()
   logger.setLevel(TRACE)
-  
+
   req <- list(
-    params = list(
+    parameters = list(
       serverid = "joule.mazamascience.com",
       lookbackdays = "3"
     )
   )
-  
+
   cacheDir = "~/Projects/MazamaScience/mazama-plot-service/plot-service/output"
-  
+
 }
 
 ########################################################################
@@ -39,11 +39,11 @@ createInfoList <- function(req = NULL,
   if (is.null(cacheDir)) stop(paste0("Required parameter 'cacheDir' is missing."), call. = FALSE)
 
   # Initialize the infoList from the request parameters
-  infoList <- req$params
+  infoList <- req$parameters
   names(infoList) <- tolower(names(infoList))
 
-  logger.debug("req$params")
-  logger.debug(capture.output(str(req$params)))
+  logger.debug("req$parameters")
+  logger.debug(capture.output(str(req$parameters)))
 
   # ----- Check for required parameters ----------------------------------------
 
@@ -80,13 +80,13 @@ createInfoList <- function(req = NULL,
   if ( is.null(infoList$enddate) ) {
     infoList$enddate <- strftime(lubridate::now(tzone = "UTC"), format = "%Y%m%d%H%M", tz = "UTC")
   }
-  
+
   if ( is.null(infoList$startdate) ) {
     endtime <- lubridate::parse_date_time(infoList$enddate, orders=c("ymd","ymdH","ymdHM","ymdHMS"), truncated=3)
     starttime <- endtime - lubridate::ddays(infoList$lookbackdays)
     infoList$startdate <- strftime(starttime, format = "%Y%m%d%H%M", tz = "UTC")
   }
-  
+
   # TODO:  Could validate times and order at this point
 
   # ----- Create uniqueID based on parameters that affect the presentation ----
