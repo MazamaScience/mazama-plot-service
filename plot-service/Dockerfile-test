@@ -16,7 +16,7 @@ RUN installGithub.r \
     MazamaScience/beakr
 
 #######################################################################
-# jug instance configuration
+# beakr instance configuration
 #
 # On joule, ProxypPass settings are defined in:
 #
@@ -60,10 +60,10 @@ ENV LOG_DIR /app/logs
 WORKDIR /app
 
 # jug app and all associated files
-COPY plot-service-app.R /app
+#COPY plot-service-app.R /app
 COPY output /app/output
 COPY R /app/R
 
 # Start the jug app when the image starts up
-CMD [ "Rscript", "/app/plot-service-app.R" ]
+CMD [ "Rscript", "/app/R/plot-service-app.R" ]
 

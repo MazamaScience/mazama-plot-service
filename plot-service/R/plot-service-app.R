@@ -24,7 +24,7 @@
 
 suppressPackageStartupMessages({
   library(methods)                # always included for Rscripts
-  library(jug)                    # web service framework
+  #library(jug)                    # web service framework
   library(MazamaCoreUtils)         # cache management
   ###library(MazamaWebUtils)         # cache management
   library(digest)                 # creation of uniqueID
@@ -48,7 +48,7 @@ for (file in utilFiles) {
 
 # Specify global (configurable) variables -------------------------------------
 
-VERSION <- "1.0.0" # first version . server-load . first working version
+VERSION <- "1.0.2" # first version . server-load . first working version
 
 # Set up configurable variables
 

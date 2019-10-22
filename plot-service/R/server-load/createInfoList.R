@@ -1,7 +1,7 @@
 ########################################################################
 # server-load/createInfoList.R
 #
-# Create an infoList from a jug request object.
+# Create an infoList from a beakr request object.
 #
 # Besides basic conversion from strings to other data types, a lot of
 # specific choices can made here that will be used later on in different

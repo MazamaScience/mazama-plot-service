@@ -21,23 +21,23 @@ SERVICE_PATH=plot-service/v1
 SERVICE_PATH_TEST=plot-service/test
 
 # ---- . ---- . updated to use MazamaCoreUtils
-VERSION=1.0.1
+VERSION=1.0.2
 
 # DESKTOP version -------------------------------------------------------------
 
 # NOTE:  DESKTOP reuses Dockerfile-test but has a separate docker-compse-desktop.yml
 desktop_build:
 	-mkdir plot-service/output
-	cd plot-service; docker build -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
+	cd ./plot-service; docker build -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
 
 desktop_up:
-	docker-compose -f docker-compose-desktop.yml -p plotservicedesktop up -d
+	docker-compose -f docker/docker-compose-desktop.yml -p plotservicedesktop up -d
 
 desktop_down:
-	docker-compose -f docker-compose-desktop.yml -p plotservicedesktop down
+	docker-compose -f docker/docker-compose-desktop.yml -p plotservicedesktop down
 
 desktop_container_logs:
-	docker-compose -f docker-compose-desktop.yml -p plotservicedesktop logs -f
+	docker-compose -f docker/docker-compose-desktop.yml -p plotservicedesktop logs -f
 
 desktop_bounce: desktop_down desktop_up
 
@@ -48,16 +48,16 @@ desktop_reboot: desktop_down desktop_build desktop_up
 
 test_build:
 	-mkdir plot-service/output
-	cd plot-service; docker build -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
+	cd ./plot-service; docker build -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
 
 test_up:
-	docker-compose -f docker-compose-test.yml -p plotservicetest up -d
+	docker-compose -f docker/docker-compose-test.yml -p plotservicetest up -d
 
 test_down:
-	docker-compose -f docker-compose-test.yml -p plotservicetest down
+	docker-compose -f docker/docker-compose-test.yml -p plotservicetest down
 
 test_container_logs:
-	docker-compose -f docker-compose.yml -p plotservicetest logs
+	docker-compose -f docker/docker-compose.yml -p plotservicetest logs
 
 test_trace_log:
 	cat /var/log/$(SERVICE_PATH_TEST)/app/TRACE.log
@@ -80,16 +80,16 @@ test_reboot: test_down test_build test_up
 
 production_build:
 	-mkdir plot-service/output
-	cd plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
+	cd ./plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
 
 production_up:
-	docker-compose -f docker-compose-v1.yml -p plotservicev1 up -d
+	docker-compose -f docker/docker-compose-v1.yml -p plotservicev1 up -d
 
 production_down:
-	docker-compose -f docker-compose-v1.yml -p plotservicev1 down
+	docker-compose -f docker/docker-compose-v1.yml -p plotservicev1 down
 
 production_container_logs:
-	docker-compose -f docker-compose-v1.yml -p plotservicev1 logs
+	docker-compose -f docker/docker-compose-v1.yml -p plotservicev1 logs
 
 production_trace_log:
 	cat /var/log/$(SERVICE_PATH)/app/TRACE.log
