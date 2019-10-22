@@ -4,10 +4,11 @@ MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
 #######################################################################
 # For the monitor-custom app
 RUN install2.r --error \
-    jug \
+    ggthemes \
+    jug # Removing this breaks the functionality - even when using beakr - why?
 #   MazamaCoreUtils \
 #   MazamaWebUtils \
-    ggthemes
+#    ggthemes
 
 # Install latest development versions of packages
 RUN installGithub.r \

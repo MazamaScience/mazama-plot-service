@@ -4,15 +4,15 @@
 # Author: Spencer Pease
 #         Jonathan Callahan <jonathan@mazamscience.com>
 #
-# Top level web framework based on the jug package.
+# Top level web framework based on the beakr package.
 #
-# Source this script and a jug instance will be running at http://localhost:8080
+# Source this script and a beakr instance will be running at http://localhost:8080
 # until the script is ended.
 #
 # This script can be run inside a docker container to create an always-up web
 # service.
 #
-# See:  https://github.com/MazamaScience/jug
+# See:  https://github.com/MazamaScience/beakr
 # See:  https://github.com/MazamaScience/MazamaWebUtils
 #
 ################################################################################
@@ -24,14 +24,13 @@
 
 suppressPackageStartupMessages({
   library(methods)                # always included for Rscripts
-  #library(jug)                    # web service framework
   library(MazamaCoreUtils)         # cache management
   ###library(MazamaWebUtils)         # cache management
   library(digest)                 # creation of uniqueID
   library(stringr)                # manipulation of data in InfoList
   library(dplyr)                  # dataframe manipulations
   library(ggplot2)                # plotting
-  library(beakr)
+  library(beakr)                  # web service framework
 })
 
 # Load all shared utility functions
@@ -54,9 +53,9 @@ VERSION <- "1.0.2" # first version . server-load . first working version
 
 if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
 
-  # jug instance configuration
-  BEAKR_HOST <- "127.0.0.1" # jug default
-  BEAKR_PORT <- "8080"      # jug default
+  # beakr instance configuration
+  BEAKR_HOST <- "127.0.0.1" # beakr default
+  BEAKR_PORT <- "8080"      # beakr default
 
   # path and cache
   SERVICE_PATH <- "plot-service/dev"
@@ -75,7 +74,7 @@ if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
 
 } else { # Running from Docker
 
-  # jug instance configuration
+  # beakr instance configuration
   BEAKR_HOST <- Sys.getenv("BEAKR_HOST")
   BEAKR_PORT <- Sys.getenv("BEAKR_PORT")
 
@@ -135,9 +134,8 @@ logger.debug('DATA_DIR = %s', DATA_DIR)
 logger.debug('LOG_DIR = %s', LOG_DIR)
 
 
-# ----- BEGIN jug app ---------------------------------------------------------
+# ----- BEGIN beakr app ---------------------------------------------------------
 
-#jug() %>%
 createBeakr() %>%
   # Return json dscription of this service ------------------------------------
 
@@ -313,4 +311,4 @@ createBeakr() %>%
   listen(host = BEAKR_HOST, port = as.integer(BEAKR_PORT))
 
 
-# ----- END jug app -----------------------------------------------------------
+# ----- END beakr app -----------------------------------------------------------
