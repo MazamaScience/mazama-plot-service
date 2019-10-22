@@ -6,9 +6,6 @@ MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
 RUN install2.r --error \
     ggthemes \
     jug # Removing this breaks the functionality - even when using beakr - why?
-#   MazamaCoreUtils \
-#   MazamaWebUtils \
-#    ggthemes
 
 # Install latest development versions of packages
 RUN installGithub.r \
@@ -60,11 +57,10 @@ ENV LOG_DIR /app/logs
 
 WORKDIR /app
 
-# jug app and all associated files
-#COPY plot-service-app.R /app
+# beakr app and all associated files
 COPY output /app/output
 COPY R /app/R
 
-# Start the jug app when the image starts up
+# Start the beakr app when the image starts up
 CMD [ "Rscript", "/app/R/plot-service-app.R" ]
 
