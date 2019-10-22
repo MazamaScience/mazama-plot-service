@@ -34,8 +34,8 @@ RUN installGithub.r \
 # Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
 #
 # The block of ports 6000-6009 is reserved for the 'plot-service' service
-ENV JUG_HOST 0.0.0.0
-ENV JUG_PORT 6009
+ENV BEAKR_HOST 0.0.0.0
+ENV BEAKR_PORT 6009
 
 EXPOSE 6009
 

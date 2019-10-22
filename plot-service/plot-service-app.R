@@ -52,11 +52,11 @@ VERSION <- "1.0.0" # first version . server-load . first working version
 
 # Set up configurable variables
 
-if (Sys.getenv("JUG_HOST") == "") { # Running from RStudio
+if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
 
   # jug instance configuration
-  JUG_HOST <- "127.0.0.1" # jug default
-  JUG_PORT <- "8080"      # jug default
+  BEAKR_HOST <- "127.0.0.1" # jug default
+  BEAKR_PORT <- "8080"      # jug default
 
   # path and cache
   SERVICE_PATH <- "plot-service/dev"
@@ -76,8 +76,8 @@ if (Sys.getenv("JUG_HOST") == "") { # Running from RStudio
 } else { # Running from Docker
 
   # jug instance configuration
-  JUG_HOST <- Sys.getenv("JUG_HOST")
-  JUG_PORT <- Sys.getenv("JUG_PORT")
+  BEAKR_HOST <- Sys.getenv("BEAKR_HOST")
+  BEAKR_PORT <- Sys.getenv("BEAKR_PORT")
 
   # path and cache
   SERVICE_PATH <- Sys.getenv("SERVICE_PATH")
@@ -118,7 +118,7 @@ result <- try({
 }, silent = TRUE)
 stopOnError(result, "Could not create log files.")
 
-if (Sys.getenv("JUG_HOST") == "") { # Running from RStudio
+if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
   logger.setLevel(TRACE)            # send error messages to console (RStudio)
 }
 
@@ -126,8 +126,8 @@ if (Sys.getenv("JUG_HOST") == "") { # Running from RStudio
 logger.debug(capture.output(sessionInfo()))
 
 # Log environment variables
-logger.debug('JUG_HOST = %s', JUG_HOST)
-logger.debug('JUG_PORT = %s', JUG_PORT)
+logger.debug('BEAKR_HOST = %s', BEAKR_HOST)
+logger.debug('BEAKR_PORT = %s', BEAKR_PORT)
 logger.debug('SERVICE_PATH = %s', SERVICE_PATH)
 logger.debug('CACHE_DIR = %s', CACHE_DIR)
 logger.debug('CACHE_SIZE = %s', CACHE_SIZE)
@@ -310,7 +310,7 @@ createBeakr() %>%
   handleErrors() %>%
 
   # Return --------------------------------------------------------------------
-  listen(host = JUG_HOST, port = as.integer(JUG_PORT))
+  listen(host = BEAKR_HOST, port = as.integer(BEAKR_PORT))
 
 
 # ----- END jug app -----------------------------------------------------------
