@@ -4,18 +4,24 @@ MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
 #######################################################################
 # For the monitor-custom app
 RUN install2.r --error \
-    jug \
-#   MazamaCoreUtils \
-#   MazamaWebUtils \
-    ggthemes
+    ggthemes \
+    futile.logger \
+    R6 \
+    webutils \
+    httpuv \
+    mime \
+    jsonlite \
+    base64enc \
+    magrittr
 
 # Install latest development versions of packages
 RUN installGithub.r \
     MazamaScience/MazamaCoreUtils \
-    MazamaScience/MazamaWebUtils
+    MazamaScience/MazamaWebUtils \
+    MazamaScience/beakr
 
 #######################################################################
-# jug instance configuration
+# beakr instance configuration
 #
 # On joule, ProxypPass settings are defined in:
 #
@@ -33,8 +39,8 @@ RUN installGithub.r \
 # Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
 #
 # The block of ports 6000-6009 is reserved for the 'plot-service' service
-ENV JUG_HOST 0.0.0.0
-ENV JUG_PORT 6001
+ENV BEAKR_HOST 0.0.0.0
+ENV BEAKR_PORT 6001
 
 EXPOSE 6001
 
@@ -58,11 +64,10 @@ ENV LOG_DIR /app/logs
 
 WORKDIR /app
 
-# jug app and all associated files
-COPY plot-service-app.R /app
+# beakr app and all associated files
 COPY output /app/output
 COPY R /app/R
 
-# Start the jug app when the image starts up
-CMD [ "Rscript", "/app/plot-service-app.R" ]
+# Start the beakr app when the image starts up
+CMD [ "Rscript", "/app/R/plot-service-app.R" ]
 
