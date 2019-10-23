@@ -5,7 +5,14 @@ MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
 # For the monitor-custom app
 RUN install2.r --error \
     ggthemes \
-    jug # Removing this breaks the functionality - even when using beakr - why?
+    futile.logger \
+    R6 \
+    webutils \
+    httpuv \
+    mime \
+    jsonlite \
+    base64enc \
+    magrittr
 
 # Install latest development versions of packages
 RUN installGithub.r \
