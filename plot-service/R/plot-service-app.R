@@ -17,15 +17,14 @@
 #
 ################################################################################
 
-# Specficic packages and scripts for this service -----------------------------
+# ----- Libraries and scripts --------------------------------------------------
 
 # NOTE:  Use library() so that these package versions will be documented by
 #        sessionInfo()
 
 suppressPackageStartupMessages({
   library(methods)                # always included for Rscripts
-  library(MazamaCoreUtils)         # cache management
-  ###library(MazamaWebUtils)         # cache management
+  library(MazamaCoreUtils)        # cache management
   library(digest)                 # creation of uniqueID
   library(stringr)                # manipulation of data in InfoList
   library(dplyr)                  # dataframe manipulations
@@ -35,8 +34,6 @@ suppressPackageStartupMessages({
 
 # Load all shared utility functions
 #   - createAPIList: create a list of API parameters
-#   - setMonitorIDs: convert monitor ids t standard format
-#   - stopOnError:   error handling/translation
 # Additional files are sourced inside of <subservice>/createProduct.R
 
 utilFiles <- list.files("R/sharedUtils", pattern = ".+\\.R", full.names = TRUE)
@@ -45,13 +42,13 @@ for (file in utilFiles) {
   source(file.path(getwd(), file))
 }
 
-# Specify global (configurable) variables -------------------------------------
+# ----- Configure beakr --------------------------------------------------------
 
-VERSION <- "1.0.2" # first version . server-load . first working version
+VERSION <- "1.1.0"
 
 # Set up configurable variables
 
-if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
+if ( interactive() ) { # Running from RStudio
 
   # beakr instance configuration
   BEAKR_HOST <- "127.0.0.1" # beakr default
@@ -63,11 +60,13 @@ if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
 
   # directories for log output, data, and cache
   DATA_DIR <- file.path(getwd(), "data")
-  if (!file.exists(DATA_DIR)) dir.create(DATA_DIR)
+  if ( !file.exists(DATA_DIR) ) dir.create(DATA_DIR)
+  
   LOG_DIR <- file.path(getwd(), "logs")
-  if (!file.exists(LOG_DIR)) dir.create(LOG_DIR)
+  if ( !file.exists(LOG_DIR) ) dir.create(LOG_DIR)
+  
   CACHE_DIR <- file.path(getwd(), "output")
-  if (!file.exists(CACHE_DIR)) dir.create(CACHE_DIR)
+  if ( !file.exists(CACHE_DIR) ) dir.create(CACHE_DIR)
 
   # Clean out the cache (only when running from RStudio)
   removalStatus <- file.remove( list.files(CACHE_DIR, full.names=TRUE) )
@@ -91,7 +90,6 @@ if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
 
 # Silence other warning messages
 options(warn = -1) # -1=ignore, 0=save/print, 1=print, 2=error
-
 
 # ----- Set up Logging --------------------------------------------------------
 
@@ -117,8 +115,8 @@ result <- try({
 }, silent = TRUE)
 stopOnError(result, "Could not create log files.")
 
-if (Sys.getenv("BEAKR_HOST") == "") { # Running from RStudio
-  logger.setLevel(TRACE)            # send error messages to console (RStudio)
+if ( interactive() ) {     # Running from RStudio
+  logger.setLevel(TRACE)   # send error messages to console (RStudio)
 }
 
 # Capture session info
@@ -134,10 +132,11 @@ logger.debug('DATA_DIR = %s', DATA_DIR)
 logger.debug('LOG_DIR = %s', LOG_DIR)
 
 
-# ----- BEGIN beakr app ---------------------------------------------------------
+# ----- BEGIN beakr app --------------------------------------------------------
 
 createBeakr() %>%
-  # Return json dscription of this service ------------------------------------
+  
+  # ----- Root URL-- show API --------------------------------------------------
 
   # regex matches zero or one final '/'
   GET(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
@@ -154,7 +153,7 @@ createBeakr() %>%
 
   }) %>%
 
-  # Return json dscription of this service ------------------------------------
+  # ----- Show API -------------------------------------------------------------
 
   # regex ignores capitalization and matches zero or one final '/'
   GET(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
@@ -172,9 +171,8 @@ createBeakr() %>%
 
   }) %>%
 
-  # Products -----------------------------------------------------------------
-
-  # NOTE:  All subservices are handled the same way. Each has its own subdirectory
+  # ----- Create products ------------------------------------------------------
+  # NOTE:  All subservices are handled the same way. Each has a subdirectory
   # NOTE:  with files that define the following top-level functions:
   # NOTE:   * createDataList
   # NOTE:   * createInfoList
@@ -300,15 +298,16 @@ createBeakr() %>%
 
   }) %>%
 
-  # Serve static files --------------------------------------------------------
+  # ----- Serve static files ---------------------------------------------------
 
   static(SERVICE_PATH) %>%
 
-  # Error handling ------------------------------------------------------------
+  # ----- Handle errors  -------------------------------------------------------
+
   handleErrors() %>%
 
-  # Return --------------------------------------------------------------------
+  # ----- Return ---------------------------------------------------------------
+
   listen(host = BEAKR_HOST, port = as.integer(BEAKR_PORT))
 
 
-# ----- END beakr app -----------------------------------------------------------

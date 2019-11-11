@@ -20,10 +20,18 @@
 SERVICE_PATH=plot-service/v1
 SERVICE_PATH_TEST=plot-service/test
 
-# ---- . ---- . updated to use MazamaCoreUtils
-VERSION=1.0.2
+# ---- . beakr . ----
+VERSION=1.1.0
 
-# DESKTOP version -------------------------------------------------------------
+# ----- TESTING ----------------------------------------------------------------
+ 
+clean:
+	-rm -rf plot-service/data
+	-rm -rf plot-service/logs
+	-rm -rf plot-service/output
+
+
+# ----- DESKTOP version --------------------------------------------------------
 
 # NOTE:  DESKTOP reuses Dockerfile-test but has a separate docker-compse-desktop.yml
 desktop_build:
@@ -44,7 +52,7 @@ desktop_bounce: desktop_down desktop_up
 desktop_reboot: desktop_down desktop_build desktop_up
 
 
-# TEST version -----------------------------------------------------------------
+# ----- TEST version -----------------------------------------------------------
 
 test_build:
 	-mkdir plot-service/output
@@ -76,7 +84,7 @@ test_bounce: test_down test_up
 test_reboot: test_down test_build test_up
 
 
-# PRODUCTION version ----------------------------------------------------------
+# ----- PRODUCTION version -----------------------------------------------------
 
 production_build:
 	-mkdir plot-service/output

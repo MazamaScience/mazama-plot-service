@@ -22,28 +22,36 @@ The basic files required for a product-only webservice (no UI) are the following
 ├── Makefile
 ├── NEWS.md
 ├── README.md
-├── docker-compose-desktop.yml
-├── docker-compose-test.yml
-├── docker-compose.yml
-└── plot-service/
-    ├── Dockerfile
+├── README_THIS_IS_GIT_BRANCH_master
+├── docker
+│   ├── docker-compose-desktop.yml
+│   ├── docker-compose-test.yml
+│   └── docker-compose-v1.yml
+├── mazama-plot-service.Rproj
+└── plot-service
     ├── Dockerfile-test
-    ├── R/
-    ├── logs/
-    ├── plot-service-app.R
-    └── output/
+    ├── Dockerfile-v1
+    └── R
+        ├── plot-service-app.R
+        ├── server-load
+        │   ├── createDataList.R
+        │   ├── createInfoList.R
+        │   ├── createProduct.R
+        │   ├── createTextList_en.R
+        │   └── createTextList_es.R
+        └── sharedUtils
+            └── createAPIList.R
 ```
+
+A single `server-load` _sub-service_ is defined with all relevant R scripts
+located in `plot-service/R/server-load`.
 
 ## Running the app from RStudio ##
 
-Outside of RStudio you must first:
-
- * `make desktop_download_data`
-
 Inside RStudio you can run the app with:
 
- * `cd plot-service/`
- * "Set As Working Directoroy"
+ * `cd plot-service/plot-service`
+ * "Files > More > Set As Working Directoroy"
  * open up `plot-service-app.R`
  * set breakpoints if desired
  * click the 'Source' button

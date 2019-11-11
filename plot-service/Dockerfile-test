@@ -17,7 +17,6 @@ RUN install2.r --error \
 # Install latest development versions of packages
 RUN installGithub.r \
     MazamaScience/MazamaCoreUtils \
-    MazamaScience/MazamaWebUtils \
     MazamaScience/beakr
 
 #######################################################################
