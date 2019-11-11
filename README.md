@@ -44,7 +44,7 @@ The basic files required for a product-only webservice (no UI) are the following
 ```
 
 A single `server-load` _sub-service_ is defined with all relevant R scripts
-located in `plot-service/R/server-load`.
+located in `plot-service/R/server-load/`.
 
 ## Running the app from RStudio ##
 

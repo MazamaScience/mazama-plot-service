@@ -49,7 +49,7 @@ desktop_container_logs:
 
 desktop_bounce: desktop_down desktop_up
 
-desktop_reboot: desktop_down desktop_build desktop_up
+desktop_reboot: desktop_build desktop_down desktop_up
 
 
 # ----- TEST version -----------------------------------------------------------
@@ -81,7 +81,7 @@ test_error_log:
 
 test_bounce: test_down test_up
 
-test_reboot: test_down test_build test_up
+test_reboot: test_build test_down test_up
 
 
 # ----- PRODUCTION version -----------------------------------------------------
@@ -113,5 +113,5 @@ production_error_log:
 
 production_bounce: production_down production_up
 
-production_reboot: production_down production_build production_up
+production_reboot: production_build production_down production_up
 
