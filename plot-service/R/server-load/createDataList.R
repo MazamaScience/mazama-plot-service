@@ -6,14 +6,19 @@
 # Author: Spencer Pease, Jonathan Callahan
 ########################################################################
 
-createDataList <- function(infoList = NULL, dataDir = NULL) {
-
+createDataList <- function(
+  infoList = NULL, 
+  dataDir = NULL
+) {
+  
   logger.debug("----- server-load/createDataList() -----")
-
-  if (is.null(infoList)) stop(paste0("Required parameter 'infoList' is missing."), call. = FALSE)
-
-  # ----- Load data -----------------------------------------------------------
-
+  
+  # ----- Validate parameters --------------------------------------------------
+  
+  MazamaCoreUtils::stopIfNull(infoList)
+  
+  # ----- Load data ------------------------------------------------------------
+  
   # NOTE:  Need to watch out for reboots that change the number of commas
   #
   # 2018-06-07 18:16:01 up 35 days, 59 min,  0 users,  load average: 0.05, 0.01, 0.09
@@ -70,10 +75,10 @@ createDataList <- function(infoList = NULL, dataDir = NULL) {
     uptimeData <- data.frame(Sys.time(), 0)
     colnames(uptimeData) <- c("datetime", "load_15_min")
   }
-
-  # ----- Validate data -------------------------------------------------------
-
-  # ----- Load 'free -h' data -------------------------------------------------
+  
+  # ----- Validate data --------------------------------------------------------
+  
+  # ----- Load 'free -h' data --------------------------------------------------
   
   memoryData = NULL
   
@@ -95,9 +100,9 @@ createDataList <- function(infoList = NULL, dataDir = NULL) {
     memoryData <- data.frame(Sys.time(), 0, 0)
     colnames(memoryData) <- c("datetime", "total", "used")
   }
-
-  # ----- Create data structures ----------------------------------------------
-
+  
+  # ----- Create data structures -----------------------------------------------
+  
   # Create dataList
   dataList <- list(
     uptimeData = uptimeData,

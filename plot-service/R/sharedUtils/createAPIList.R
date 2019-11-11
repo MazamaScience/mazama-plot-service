@@ -6,13 +6,16 @@
 # Author: Spencer Pease, Jonathan Callahan
 ########################################################################
 
-createAPIList <- function(name=NULL, version=NULL) {
-
+createAPIList <- function(
+  name = NULL, 
+  version = NULL
+) {
+  
   logger.debug("----- createAPIList() -----")
-
+  
   if ( is.null(name) ) stop(paste0("Required parameter 'name' is missing."), call. = FALSE)
   if ( is.null(version) ) stop(paste0("Required parameter 'version' is missing."), call. = FALSE)
-
+  
   # Service definition to be desplayed as JSON when no UI exists
   APIList <- list(
     name = "plot-service",
@@ -35,6 +38,6 @@ createAPIList <- function(name=NULL, version=NULL) {
       )
     ) # END of services list
   ) # END of APIList
-
+  
   return(APIList)
 }

@@ -11,15 +11,21 @@
 #' @description
 #'
 
-createProduct <- function(dataList = NULL, infoList = NULL, textList = NULL) {
+createProduct <- function(
+  dataList = NULL, 
+  infoList = NULL, 
+  textList = NULL
+) {
   
   logger.debug("----- server-load/createProduct() -----")
   
-  if (is.null(dataList)) stop(paste0("Required parameter 'dataList' is missing."), call. = FALSE)
-  if (is.null(infoList)) stop(paste0("Required parameter 'infoList' is missing."), call. = FALSE)
-  if (is.null(textList)) stop(paste0("Required parameter 'textList' is missing."), call. = FALSE)
+  # ----- Validate parameters --------------------------------------------------
   
-  # ----- get parameters -------------------------------------------------------
+  MazamaCoreUtils::stopIfNull(dataList)
+  MazamaCoreUtils::stopIfNull(infoList)
+  MazamaCoreUtils::stopIfNull(textList)
+  
+  # ----- Get parameters -------------------------------------------------------
   
   # Uptime data
   uptimeData <- dataList$uptimeData
