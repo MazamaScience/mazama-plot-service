@@ -33,7 +33,7 @@ createDataList <- function(
   uptimeData = NULL
   
   result <- try({
-    uptimeLogUrl <- paste0('http://', serverID, '/logs/uptime.log')
+    uptimeLogUrl <- paste0('https://', serverID, '/logs/uptime.log')
     
     # Instead, load the data as lines for further parsing
     lines <- readr::read_lines(uptimeLogUrl)
