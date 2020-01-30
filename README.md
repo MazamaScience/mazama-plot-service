@@ -50,9 +50,9 @@ located in `plot-service/R/server-load/`.
 
 Inside RStudio you can run the app with:
 
- * `cd plot-service/plot-service`
- * "Files > More > Set As Working Directoroy"
- * open up `plot-service-app.R`
+ * `cd plot-service/`
+ * "Files > More > Set As Working Directory"
+ * open up `R/plot-service-app.R`
  * set breakpoints if desired
  * click the 'Source' button
 

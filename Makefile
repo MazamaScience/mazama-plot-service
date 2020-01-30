@@ -20,8 +20,8 @@
 SERVICE_PATH=plot-service/v1
 SERVICE_PATH_TEST=plot-service/test
 
-# ---- . beakr . ----
-VERSION=1.1.0
+# ---- . beakr 0.3 . ----
+VERSION=1.2.0
 
 # ----- TESTING ----------------------------------------------------------------
  
