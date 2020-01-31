@@ -13,14 +13,14 @@
 # service.
 #
 # See:  https://github.com/MazamaScience/beakr
-# See:  https://github.com/MazamaScience/MazamaWebUtils
+# See:  https://github.com/MazamaScience/MazamaCoreUtils
 #
 ################################################################################
 
 # ----- Libraries and scripts --------------------------------------------------
 
 # NOTE:  Use library() so that these package versions will be documented by
-#        sessionInfo()
+# NOTE:  sessionInfo()
 
 suppressPackageStartupMessages({
   library(methods)                # always included for Rscripts
@@ -69,7 +69,7 @@ if ( interactive() ) { # Running from RStudio
   if ( !file.exists(CACHE_DIR) ) dir.create(CACHE_DIR)
 
   # Clean out the cache (only when running from RStudio)
-  removalStatus <- file.remove( list.files(CACHE_DIR, full.names=TRUE) )
+  removalStatus <- file.remove( list.files(CACHE_DIR, full.names = TRUE) )
 
 } else { # Running from Docker
 
@@ -103,7 +103,7 @@ result <- try({
       file.rename(oldFile, newFile)
     }
   }
-}, silent=TRUE)
+}, silent = TRUE)
 stopOnError(result, "Could not rename old log files.")
 
 result <- try({
@@ -134,12 +134,12 @@ logger.debug('LOG_DIR = %s', LOG_DIR)
 
 # ----- BEGIN beakr app --------------------------------------------------------
 
-createBeakr() %>%
+newBeakr() %>%
   
   # ----- Root URL-- show API --------------------------------------------------
 
   # regex matches zero or one final '/'
-  GET(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
+  httpGET(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
 
     logger.info("----- %s -----", req$path)
 
@@ -156,7 +156,7 @@ createBeakr() %>%
   # ----- Show API -------------------------------------------------------------
 
   # regex ignores capitalization and matches zero or one final '/'
-  GET(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
+  httpGET(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
 
     logger.info("----- %s -----", req$path)
 
@@ -183,7 +183,7 @@ createBeakr() %>%
   # NOTE:  run for every custom product.
 
   # regex matches alphanumerics and zero or one final '/'
-  GET(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
+  httpGET(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
 
     # Extract lowercase subservice name
     subservice <-
@@ -249,9 +249,9 @@ createBeakr() %>%
         logger.debug("writing %s", infoList$jsonPath)
 
         responseList <- list(
-          status <- "OK",
-          rel_base <- paste0(SERVICE_PATH, "/", infoList$basePath),
-          plot_path <- paste0(SERVICE_PATH, "/", infoList$plotPath)
+          status = "OK",
+          rel_base = paste0(SERVICE_PATH, "/", infoList$basePath),
+          plot_path = paste0(SERVICE_PATH, "/", infoList$plotPath)
         )
 
         json <- jsonlite::toJSON(
@@ -300,7 +300,7 @@ createBeakr() %>%
 
   # ----- Serve static files ---------------------------------------------------
 
-  static(SERVICE_PATH) %>%
+  serveStaticFiles(SERVICE_PATH) %>%
 
   # ----- Handle errors  -------------------------------------------------------
 

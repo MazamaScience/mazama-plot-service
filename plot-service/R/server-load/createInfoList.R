@@ -66,7 +66,7 @@ createInfoList <- function(
   }
   
   if ( is.null(infoList$startdate) ) {
-    endtime <- lubridate::parse_date_time(infoList$enddate, orders=c("ymd","ymdH","ymdHM","ymdHMS"), truncated=3)
+    endtime <- MazamaCoreUtils::parseDatetime(infoList$enddate, timezone = "UTC")
     starttime <- endtime - lubridate::ddays(infoList$lookbackdays)
     infoList$startdate <- strftime(starttime, format = "%Y%m%d%H%M", tz = "UTC")
   }
@@ -85,7 +85,7 @@ createInfoList <- function(
     infoList$serverid,
     infoList$ymax,
     infoList$lookbackdays,
-    strftime(lubridate::now(), "%Y-%m-%d %H:%M"))
+    strftime(lubridate::now(tzone = "UTC"), "%Y-%m-%d %H:%M"))
   
   infoList$uniqueID <- digest::digest(uniqueList, algo = "md5")
   
@@ -102,7 +102,7 @@ createInfoList <- function(
 
 if ( FALSE ) {
   
-  library(MazamaWebUtils)
+  library(MazamaCoreUtils)
   logger.setup()
   logger.setLevel(TRACE)
   
