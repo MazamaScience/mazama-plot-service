@@ -213,7 +213,7 @@ newBeakr() %>%
     stopOnError(result)
 
     # Create a new plot file if it isn't in the cache
-    if (!file.exists(infoList$plotPath)) {
+    if ( !file.exists(infoList$plotPath) ) {
 
       # Manage the cache
       MazamaCoreUtils::manageCache(CACHE_DIR, c("json", "png", "pdf")) # TODO:  Other potential output formats?

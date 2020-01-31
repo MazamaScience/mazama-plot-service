@@ -42,7 +42,7 @@ createInfoList <- function(
   
   infoList$language <- tolower(ifelse(is.null(infoList$language),"en", infoList$language))
   infoList$responsetype <- tolower(ifelse(is.null(infoList$responsetype), "raw", infoList$responsetype))
-  infoList$lookbackdays <- ifelse(is.null(infoList$lookbackdays), 7, trunc(as.numeric(infoList$lookbackdays)))
+  infoList$lookbackdays <- ifelse(is.null(infoList$lookbackdays), 3, trunc(as.numeric(infoList$lookbackdays)))
   
   infoList$outputfiletype <- ifelse(is.null(infoList$outputfiletype), "png", infoList$outputfiletype)
   

@@ -57,8 +57,11 @@ createDataList <- function(
     fakeLines <- fakeLines[ !stringr::str_detect(fakeLines, "NA") ]
     fakeFile <- paste(fakeLines, collapse="\n")
     
-    uptimeData <- readr::read_csv(fakeFile,
-                                  col_names = c('datetime', 'userCount', 'load_1_min', 'load_5_min', 'load_15_min'))
+    uptimeData <- readr::read_csv(
+      file = fakeFile,
+      col_names = c('datetime', 'userCount', 'load_1_min', 'load_5_min', 'load_15_min'),
+      col_types = "Tiddd"
+    )
     
     # Use dplyr to filter
     uptimeData <-
@@ -84,13 +87,16 @@ createDataList <- function(
   result <- try({
     memoryLogUrl <- paste0('https://', serverID, '/logs/free_memory.log')
     col_names <- c('datetime','dummy','total','used','free','shared','buff_cache','available')
-    memoryData <- readr::read_fwf(memoryLogUrl, readr::fwf_empty(memoryLogUrl, col_names=col_names))
+    memoryData <- readr::read_fwf(
+      file = memoryLogUrl, 
+      col_positions = readr::fwf_empty(memoryLogUrl, col_names = col_names),
+      col_types = "Tciiiiii"
+    )
     memoryData$dummy <- NULL
-    
     memoryData <-
       memoryData %>%
       filter(datetime >= startDate)
-  }, silent=TRUE)
+  }, silent = TRUE)
   
   # Create dummy data to use if the memory log is unavailible 
   if ("try-error" %in% class(result)) {
