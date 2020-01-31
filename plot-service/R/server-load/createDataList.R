@@ -83,7 +83,7 @@ createDataList <- function(
   memoryData = NULL
   
   result <- try({
-    memoryLogUrl <- paste0('http://', serverID, '/logs/free_memory.log')
+    memoryLogUrl <- paste0('https://', serverID, '/logs/free_memory.log')
     col_names <- c('datetime','dummy','total','used','free','shared','buff_cache','available')
     memoryData <- readr::read_fwf(memoryLogUrl, readr::fwf_empty(memoryLogUrl, col_names=col_names))
     memoryData$dummy <- NULL
