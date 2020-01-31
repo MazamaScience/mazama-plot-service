@@ -38,6 +38,10 @@ desktop_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
 
+desktop_build_nocache:
+	-mkdir plot-service/output
+	cd ./plot-service; docker build --no-cache -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
+
 desktop_up:
 	docker-compose -f docker/docker-compose-desktop.yml -p plotservicedesktop up -d
 
@@ -58,6 +62,10 @@ test_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
 
+test_build_nocache:
+	-mkdir plot-service/output
+	cd ./plot-service; docker build --no-cache -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
+
 test_up:
 	docker-compose -f docker/docker-compose-test.yml -p plotservicetest up -d
 
@@ -65,7 +73,7 @@ test_down:
 	docker-compose -f docker/docker-compose-test.yml -p plotservicetest down
 
 test_container_logs:
-	docker-compose -f docker/docker-compose.yml -p plotservicetest logs
+	docker-compose -f docker/docker-compose-test.yml -p plotservicetest logs
 
 test_trace_log:
 	cat /var/log/$(SERVICE_PATH_TEST)/app/TRACE.log
@@ -89,6 +97,10 @@ test_reboot: test_build test_down test_up
 production_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
+
+production_build_nocache:
+	-mkdir plot-service/output
+	cd ./plot-service; docker build --no-cache -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
 
 production_up:
 	docker-compose -f docker/docker-compose-v1.yml -p plotservicev1 up -d

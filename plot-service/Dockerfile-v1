@@ -1,5 +1,8 @@
-FROM rocker/tidyverse:3.5.1
+FROM rocker/tidyverse:3.5.2
 MAINTAINER Jonathan Callahan <jonathan@mazamascience.com>
+
+# Update installed system libraries
+RUN apt-get update
 
 #######################################################################
 # For the monitor-custom app
@@ -13,6 +16,9 @@ RUN install2.r --error \
     jsonlite \
     base64enc \
     magrittr
+
+# Update httpuv and dependent packages
+RUN R --vanilla -e 'update.packages(repos="https://cran.rstudio.com", oldPkgs="httpuv", ask=FALSE)'
 
 # Install latest development versions of packages
 RUN installGithub.r \
