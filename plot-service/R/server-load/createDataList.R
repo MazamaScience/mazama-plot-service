@@ -27,9 +27,8 @@ createDataList <- function(
   # Sigh ... Why is nothing ever easy?
   
   serverID <- infoList$serverid
-  ###startDate <- lubridate::ymd_hm(infoList$startdate) # NOTE:  only to the minute, not second
-  startDate <- lubridate::parse_date_time(infoList$startdate, orders=c("ymd","ymdH","ymdHM","ymdHMS"), truncated=3)
-  
+  startDate <- MazamaCoreUtils::parseDatetime(infoList$startdate, timezone = "UTC")
+
   uptimeData = NULL
   
   result <- try({

@@ -20,7 +20,7 @@
 # ----- Libraries and scripts --------------------------------------------------
 
 # NOTE:  Use library() so that these package versions will be documented by
-#        sessionInfo()
+# NOTE:  sessionInfo()
 
 suppressPackageStartupMessages({
   library(methods)                # always included for Rscripts
@@ -249,9 +249,9 @@ newBeakr() %>%
         logger.debug("writing %s", infoList$jsonPath)
 
         responseList <- list(
-          status <- "OK",
-          rel_base <- paste0(SERVICE_PATH, "/", infoList$basePath),
-          plot_path <- paste0(SERVICE_PATH, "/", infoList$plotPath)
+          status = "OK",
+          rel_base = paste0(SERVICE_PATH, "/", infoList$basePath),
+          plot_path = paste0(SERVICE_PATH, "/", infoList$plotPath)
         )
 
         json <- jsonlite::toJSON(
@@ -300,7 +300,7 @@ newBeakr() %>%
 
   # ----- Serve static files ---------------------------------------------------
 
-  ###serveStaticFiles(SERVICE_PATH) %>%
+  serveStaticFiles(SERVICE_PATH) %>%
 
   # ----- Handle errors  -------------------------------------------------------
 
