@@ -16,12 +16,12 @@
 # Test these settings with:    <CentOS equivalent of "sudo apache2ctl configtest">
 # Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
 
+# ---- . beakr 0.3 . ----
+VERSION=1.2.0
+
 # NOTE:  The SERVICE_PATH should match that found in Dockerfile and Dockerfile-test
 SERVICE_PATH=plot-service/v1
 SERVICE_PATH_TEST=plot-service/test
-
-# ---- . beakr 0.3 . ----
-VERSION=1.2.0
 
 # ----- TESTING ----------------------------------------------------------------
  
@@ -38,7 +38,7 @@ desktop_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
 
-desktop_build_nocache:
+desktop_build_no-cache:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build --no-cache -t plot-service-desktop:$(VERSION) -t plot-service-desktop:latest -f Dockerfile-test .
 
@@ -62,7 +62,7 @@ test_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
 
-test_build_nocache:
+test_build_no-cache:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build --no-cache -t plot-service-test:$(VERSION) -t plot-service-test:latest -f Dockerfile-test .
 
@@ -98,7 +98,7 @@ production_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
 
-production_build_nocache:
+production_build_no-cache:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build --no-cache -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
 

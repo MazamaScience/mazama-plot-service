@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Server Health</title>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+          crossorigin="anonymous">
+
+    <script src="https://MomentJS.com/downloads/moment.js"></script>
+
+    <style media="screen">
+      header {
+        background-color: #434343;
+        box-shadow: 0px 0px 10px gray;
+        padding: 10px 20px;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        color: white;
+        font-size: 28px;
+      }
+
+      body {
+        background-color: whitesmoke;
+        font-family: sans-serif;
+      }
+
+      div.col-4 {
+        padding-left: 5px;  /* override default */
+        padding-right: 5px; /* override default */
+      }
+
+      .thumbnail {
+        margin-bottom: 10px; /* = div.col-4 padding left+right */
+        border-radius: 4px;
+        box-shadow: 0px 3px 5px gray;
+        text-align: center;
+        padding: 8px 8px;
+        background-color: lightgray;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .thumbnail img {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+
+      .thumbnail p {
+        margin: 0px 0px;
+      }
+
+      .server-group-tools-c {
+        background-color: darkseagreen;
+      }
+
+      .server-group-data-c {
+        background-color: skyblue;
+      }
+
+      .server-group-monitoring {
+        background-color: lightsalmon;
+      }
+
+      .server-group-purpleair {
+        background-color: thistle;
+      }
+
+      p.server-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container-fluid">
+        <div class="row justify-content-between align-items-center">
+          <h1>Server Health -- AirFire AWS machines</h1>
+          <img src="https://mazamascience.com/assets/logo-footer.svg" 
+               alt="Mazama Science logo" 
+               width="160px">
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+      <div id="server-gallery" class="container-fluid">
+
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c2</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=tools-c2.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="tools-c2 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://tools-c2.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="thumbnail server-group-data-c">
+              <p class="server-title">data-c1</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-c1.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="data-c1 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://data-c1.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="thumbnail server-group-monitoring">
+              <p class="server-title">data-monitoring1</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-monitoring1.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="monitoring1 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://data-monitoring1.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c3</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=tools-c3.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="tools-c3 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://tools-c3.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="thumbnail server-group-data-c">
+              <p class="server-title">data-c2</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-c2.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="data-c2 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://data-c2.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="thumbnail server-group-monitoring">
+              <p class="server-title">data-monitoring2</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-monitoring2.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="monitoring2 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://data-monitoring2.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c4</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=tools-c4.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="tools-c4 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://tools-c4.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-4">
+            <!-- EMPTY cell -->
+          </div>
+          <div class="col-4">
+            <div class="thumbnail server-group-purpleair">
+              <p class="server-title">data-purpleair1</p>
+              <img class="server-chart" 
+                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-purpleair1.airfire.org&lookbackdays=3&ymax=2" 
+                   alt="purpleair1 chart">
+              <p class="last-updated-label"></p>
+              <a href="https://data-purpleair1.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- END of server-gallery -->
+
+    </main>
+
+    <script type="text/javascript">
+
+      "use strict";
+
+      // Define these one row at a time so the get assigned properly
+      let servers = [
+        "tools-c2.airfire.org",
+        "data-c1.airfire.org",
+        "data-monitoring1.airfire.org",
+
+        "tools-c3.airfire.org",
+        "data-c2.airfire.org",
+        "data-monitoring2.airfire.org",
+
+        "tools-c4.airfire.org",
+        // blank
+        "data-purpleair1.airfire.org",
+      ];
+
+      let serverGallery = document.getElementById("server-gallery");
+      let serverCells = serverGallery.getElementsByClassName("thumbnail");
+      let serverToUpdate = 0;
+
+      /**
+       * Updates the chart of the given server.
+       * @param i - server index
+       */
+      function updateServerChart(i) {
+        let serverCell = serverCells[i];
+        let serverName = servers[i];
+
+        // Update the server chart image
+        let serverChartImg = serverCell.getElementsByTagName("img")[0];
+        serverChartImg.src = "http://tools.mazamascience.com/plot-service/v1/server-load?serverid="
+          + serverName + "&lookbackdays=1&ymax=2"; // // // + "&t=" + Date.now();
+
+        // Update the server "last updated" label
+        let serverLastUpdatedLabel = serverCell.getElementsByClassName("last-updated-label")[0];
+        serverLastUpdatedLabel.innerText = "Last updated: " + moment().format("MMMM Do [at] HH:mm:ss");
+      }
+
+      /**
+       * Load initial server charts.
+       */
+      window.onload = function() {
+        for (let i = 0; i < servers.length; i++) {
+          updateServerChart(i)
+        }
+      };
+
+      /**
+       * Updates each server chart every 3 minutes on a staggered schedule.
+       */
+      window.setInterval(function() {
+        updateServerChart(serverToUpdate)
+        serverToUpdate = ++serverToUpdate % servers.length;
+      }, ((1000 * 60 * 3) / servers.length));
+
+    </script>
+
+  </body>
+</html>

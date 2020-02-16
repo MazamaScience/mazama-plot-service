@@ -93,27 +93,7 @@ options(warn = -1) # -1=ignore, 0=save/print, 1=print, 2=error
 
 # ----- Set up Logging --------------------------------------------------------
 
-result <- try({
-  # Copy and old log files
-  timestamp <- strftime(lubridate::now(), "%Y-%m-%dT%H:%M:%S")
-  for ( logLevel in c("TRACE","DEBUG","INFO","ERROR") ) {
-    oldFile <- file.path(LOG_DIR,paste0(logLevel,".log"))
-    newFile <- file.path(LOG_DIR,paste0(logLevel,".log.",timestamp))
-    if ( file.exists(oldFile) ) {
-      file.rename(oldFile, newFile)
-    }
-  }
-}, silent = TRUE)
-stopOnError(result, "Could not rename old log files.")
-
-result <- try({
-  # Set up logging
-  logger.setup(traceLog = file.path(LOG_DIR, "TRACE.log"),
-               debugLog = file.path(LOG_DIR, "DEBUG.log"),
-               infoLog = file.path(LOG_DIR, "INFO.log"),
-               errorLog = file.path(LOG_DIR, "ERROR.log"))
-}, silent = TRUE)
-stopOnError(result, "Could not create log files.")
+MazamaCoreUtils::initializeLogging(LOG_DIR)
 
 if ( interactive() ) {     # Running from RStudio
   logger.setLevel(TRACE)   # send error messages to console (RStudio)
@@ -172,6 +152,7 @@ newBeakr() %>%
   }) %>%
 
   # ----- Create products ------------------------------------------------------
+  # 
   # NOTE:  All subservices are handled the same way. Each has a subdirectory
   # NOTE:  with files that define the following top-level functions:
   # NOTE:   * createDataList

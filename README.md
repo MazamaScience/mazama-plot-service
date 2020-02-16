@@ -70,8 +70,8 @@ The app will be available at:
 
 [localhost:8080/plot-service/test/](localhost:8080/plot-service/test/)
  
-The `Makefile` has targets for three different types of deployment: `desktop`, 
-`test`, `operational`.
+The `Makefile` has targets for three different types of deployment: 
+`desktop`, `test`, `operational`.
 
 A quick refresher on docker commands is available at the 
 [docker cheatsheet](https://github.com/wsargent/docker-cheat-sheet).
@@ -90,7 +90,7 @@ except for `desktop` which are written to:
 
 ### ProxyPass Settings ###
 
-On the computer 'haze', ProxyPass settings are defined in:
+On AWS instances, ProxyPass settings are defined in:
 
 `/etc/apache2/sites-enabled/default-ssl.conf`
 
