@@ -233,7 +233,7 @@
         // Update the server chart image
         let serverChartImg = serverCell.getElementsByTagName("img")[0];
         serverChartImg.src = "http://tools.mazamascience.com/plot-service/v1/server-load?serverid="
-          + serverName + "&lookbackdays=1&ymax=2"; // // // + "&t=" + Date.now();
+          + serverName + "&lookbackdays=3&ymax=2" + "&t=" + Date.now(); // t= is required to enforce updates
 
         // Update the server "last updated" label
         let serverLastUpdatedLabel = serverCell.getElementsByClassName("last-updated-label")[0];
@@ -250,12 +250,12 @@
       };
 
       /**
-       * Updates each server chart every 3 minutes on a staggered schedule.
+       * Updates one server chart every 10 seconds.
        */
       window.setInterval(function() {
         updateServerChart(serverToUpdate)
         serverToUpdate = ++serverToUpdate % servers.length;
-      }, ((1000 * 60 * 3) / servers.length));
+      }, (1000 * 10));
 
     </script>
 
