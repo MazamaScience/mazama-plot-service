@@ -29,7 +29,9 @@
 
       header h1 {
         color: white;
+        font-weight: bolder;
         font-size: 28px;
+        margin: 0px 0px;
       }
 
       body {
@@ -84,6 +86,10 @@
         font-size: 1.8rem;
         font-weight: bold;
       }
+
+      #server-plot-modal img {
+        width: 100%;
+      }
     </style>
   </head>
 
@@ -102,16 +108,16 @@
 
     <main>
 
-      <div id="server-gallery" class="container-fluid">
+      <div id="server-plot-gallery" class="container-fluid">
 
         <div class="row justify-content-center">
           <div class="col-4">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c2</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=tools-c2.airfire.org&lookbackdays=3&ymax=2"
-                   alt="tools-c2 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="tools-c2 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://tools-c2.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -120,10 +126,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">data-c1</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-c1.airfire.org&lookbackdays=3&ymax=2"
-                   alt="data-c1 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="data-c1 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://data-c1.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -132,10 +138,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-monitoring">
               <p class="server-title">data-monitoring1</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-monitoring1.airfire.org&lookbackdays=3&ymax=2"
-                   alt="monitoring1 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="monitoring1 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://data-monitoring1.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -147,10 +153,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c3</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=tools-c3.airfire.org&lookbackdays=3&ymax=2"
-                   alt="tools-c3 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="tools-c3 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://tools-c3.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -159,10 +165,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">data-c2</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-c2.airfire.org&lookbackdays=3&ymax=2"
-                   alt="data-c2 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="data-c2 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://data-c2.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -171,10 +177,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-monitoring">
               <p class="server-title">data-monitoring2</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-monitoring2.airfire.org&lookbackdays=3&ymax=2"
-                   alt="monitoring2 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="monitoring2 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://data-monitoring2.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -186,10 +192,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c4</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=tools-c4.airfire.org&lookbackdays=3&ymax=2"
-                   alt="tools-c4 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="tools-c4 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://tools-c4.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -201,10 +207,10 @@
           <div class="col-4">
             <div class="thumbnail server-group-purpleair">
               <p class="server-title">data-purpleair1</p>
-              <img class="server-chart"
-                   src="http://tools.mazamascience.com/plot-service/v1/server-load?serverid=data-purpleair1.airfire.org&lookbackdays=3&ymax=2"
-                   alt="purpleair1 chart"
-                   data-toggle="modal" data-target="#server-chart-modal">
+              <img class="server-plot"
+                   src="#"
+                   alt="purpleair1 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
               <a href="https://data-purpleair1.airfire.org/logs/"
                  target="_blank">Logs</a>
@@ -212,22 +218,16 @@
           </div>
         </div>
 
-      </div> <!-- END of server-gallery -->
+      </div> <!-- END of server-plot-gallery -->
 
-      <!-- Modal -->
-      <!--
-        * TODO:  Is there a URL explaining the use of "aria" stuff?
+      <!-- Modal
+        Reference: https://getbootstrap.com/docs/4.0/components/modal/
       -->
-      <div id="server-chart-modal" 
-           class="modal fade" 
-           tabindex="-1" 
-           role="dialog" 
-           aria-labelledby="server-chart-modal-label" 
-           aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+      <div id="server-plot-modal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-body">
-              <img class="modal-server-chart" src="#" alt="#" width="100%">
+              <img class="modal-server-plot" src="#" alt="#">
             </div>
           </div>
         </div>
@@ -255,56 +255,71 @@
         "data-purpleair1.airfire.org",
       ];
 
-      let serverGallery = $("#server-gallery");
+      let serverGallery = $("#server-plot-gallery");
       let serverCells = serverGallery.find(".thumbnail");
       let serverToUpdate = 0;
 
       /**
-       * Updates the chart of the given server.
+       * Updates the modal image when a server plot is clicked.
+       * Reference: https://getbootstrap.com/docs/4.0/components/modal/#varying-modal-content
        */
-      function updateServerChart(serverIndex) {
+      $("#server-plot-modal").on('show.bs.modal', function (event) {
+          let modalImage = $(this).find("img")[0];
+          modalImage.src = event.relatedTarget.src;
+          modalImage.alt = event.relatedTarget.alt;
+      });
+
+      /**
+       * Updates the plot of a single server.
+       * Reference: https://stackoverflow.com/questions/1077041/refresh-image-with-a-new-one-at-the-same-url
+       */
+      function updateServerplot(serverIndex) {
         let serverCell = $(serverCells[serverIndex]);
         let serverName = servers[serverIndex];
 
-        // Update the server chart image
-        let serverChartImg = serverCell.find("img")[0];
-        serverChartImg.src = "http://tools.mazamascience.com/plot-service/v1/server-load?serverid="
-          + serverName + "&lookbackdays=3&ymax=2&t=" + moment().format('X'); // Unix timestamp
+        // Updates the server plot image
+        let serverplotImg = serverCell.find("img")[0];
+        serverplotImg.src = "http://tools.mazamascience.com/plot-service/v1/server-load?serverid="
+          + serverName + "&lookbackdays=1&ymax=2&t=" + Date.now(); // Unique 't' parameter forces reload
 
-        // Update the server "last updated" label
+        // Updates the server "last updated" label
         let serverLastUpdatedLabel = serverCell.find(".last-updated-label")[0];
         serverLastUpdatedLabel.innerText = "Last updated: " + moment().format("MMMM Do [at] HH:mm:ss");
       }
 
       /**
-       * Updates the modal image when a server chart is clicked.
-       * 
-       * TODO:  Educational URL?
+       * Updates all server plots.
        */
-      $("#server-chart-modal").on('show.bs.modal', function (event) {
-          let modalImage = $(this).find("img")[0];
-          modalImage.src = event.relatedTarget.src;
-      });
+      function refreshServerPlots() {
+        for (let i = 0; i < servers.length; i++) {
+          updateServerplot(i)
+        }
+      }
 
       /**
-       * Load initial server charts.
+       * Loads initial server plots.
        */
       window.onload = function() {
-        for (let serverIndex = 0; serverIndex < servers.length; serverIndex++) {
-          updateServerChart(serverIndex)
-        }
+        refreshServerPlots();
       };
 
       /**
-       * Updates one server chart every 10 seconds.
+       * Updates all server plots when the window regains focus.
        */
-      window.setInterval(
-        function() {
-          updateServerChart(serverToUpdate)
-          serverToUpdate = ++serverToUpdate % servers.length;
-        }, 
-        (1000 * 10) // Every 10 seconds
-      );
+      window.addEventListener("focus", function() {
+        refreshServerPlots();
+      });
+
+      /**
+       * Updates one server plot every 10 seconds.
+       */
+       window.setInterval(
+         function() {
+           updateServerplot(serverToUpdate)
+           serverToUpdate = ++serverToUpdate % servers.length;
+         },
+         (1000 * 10) // Every 10 seconds
+       );
 
     </script>
 
