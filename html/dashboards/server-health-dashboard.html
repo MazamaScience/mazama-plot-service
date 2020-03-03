@@ -70,6 +70,10 @@
         background-color: darkseagreen;
       }
 
+      .server-group-test-c {
+        background-color: lightgray;
+      }
+
       .server-group-data-c {
         background-color: skyblue;
       }
@@ -208,7 +212,16 @@
             </div>
           </div>
           <div class="col-4">
-            <!-- EMPTY cell -->
+            <div class="thumbnail server-group-test-c">
+              <p class="server-title">test-c1</p>
+              <img class="server-plot"
+                   src="#"
+                   alt="test-c1 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
+              <p class="last-updated-label"></p>
+              <a href="https://test-c1.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
           </div>
           <div class="col-4">
             <div class="thumbnail server-group-purpleair">
@@ -257,7 +270,7 @@
         "data-monitoring2.airfire.org",
         // ----- Row 3 -----
         "tools-c4.airfire.org",
-        // blank
+        "test-c1.airfire.org",
         "data-purpleair1.airfire.org",
       ];
 
