@@ -65,13 +65,25 @@ createProduct <- function(
   # Scale the memory axis so the total memory matches the height of the uptime axis
   scale_factor = max(memoryData$total, na.rm=TRUE) / primary_y_lim
   
+  uptimeData_lastHour <- tail(uptimeData$load_15_min, 4)
+  diskData_lastHour <- tail(diskData$used, 4)
+  
+  border_color <- NULL
+  if (max(uptimeData_lastHour, na.rm = TRUE) >= 0.8) {
+    border_color <- 'red'
+  }
+  if (max(diskData_lastHour, na.rm = TRUE) >= 0.8) {
+    border_color <- 'red'
+  }
+  
   basePlot <- ggplot() +
-    geom_line(data = diskData, aes(x = datetime, y = used, color = "Disk usage"), size = 1.3) +
+    geom_area(data = diskData, aes(x = datetime, y = used, fill = "Disk usage")) + 
     geom_step(data = uptimeData, aes(x = datetime, y = load_15_min, color = "Server load")) +
     geom_step(data = memoryData, aes(x = datetime, y = used / scale_factor, linetype = "Used"), size = 1.3, color = "goldenrod1") +
     geom_line(data = memoryData, aes(x = datetime, y = total / scale_factor, linetype = "Total"), size = 1.3, color = "goldenrod1") + 
     scale_linetype_manual("Memory", values = c("Total" = "twodash", "Used" = "solid")) +
-    scale_colour_manual("Load", values = c("Server load" = "black", "Disk usage" = "cornflowerblue")) +
+    scale_colour_manual("Load", values = c("Server load" = "black", "Disk usage" = rgb(0, 0, 0, 0.1))) +
+    scale_fill_manual("Load", values = c("Server load" = "black", "Disk usage" = rgb(0, 0, 0, 0.1))) +
     #guides(color = guide_legend(order = 1, label.position = "left"), linetype = guide_legend(order = 2, label.position = "right")) + 
     #guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2)) + 
     #theme(legend.margin = unit(width, "cm")) + 
@@ -82,8 +94,8 @@ createProduct <- function(
       title = paste0("Server Health: ", serverid, "\n"),
       x = xLabel,
       y = "\n15 Minute Load\n") +
-    ggthemes::theme_hc()
-  
+    ggthemes::theme_hc() +               # Using theme_hc() restricts setting the panel background color
+    theme(panel.background = element_rect(fill = 'white', color = border_color, size = 4, linetype = 'solid'))
   
   if ( infoList$lookbackdays < 3 ) {
     
