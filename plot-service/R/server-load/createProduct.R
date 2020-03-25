@@ -41,6 +41,9 @@ createProduct <- function(
   # Memory data
   memoryData <- dataList$memoryData
   
+  # Disk data
+  diskData <- dataList$diskData
+  
   # ----- Create plot ----------------------------------------------------------
   
   # TODO:  Clean up this debugging code. Shouldn't have "if (FALSE)" *inside* a function.
@@ -63,11 +66,12 @@ createProduct <- function(
   scale_factor = max(memoryData$total, na.rm=TRUE) / primary_y_lim
   
   basePlot <- ggplot() +
+    geom_line(data = diskData, aes(x = datetime, y = used, color = "Disk usage"), size = 1.3) +
     geom_step(data = uptimeData, aes(x = datetime, y = load_15_min, color = "Server load")) +
     geom_step(data = memoryData, aes(x = datetime, y = used / scale_factor, linetype = "Used"), size = 1.3, color = "goldenrod1") +
     geom_line(data = memoryData, aes(x = datetime, y = total / scale_factor, linetype = "Total"), size = 1.3, color = "goldenrod1") + 
     scale_linetype_manual("Memory", values = c("Total" = "twodash", "Used" = "solid")) +
-    scale_colour_manual("Load", values = c("Server load" = "black")) +
+    scale_colour_manual("Load", values = c("Server load" = "black", "Disk usage" = "cornflowerblue")) +
     #guides(color = guide_legend(order = 1, label.position = "left"), linetype = guide_legend(order = 2, label.position = "right")) + 
     #guides(color = guide_legend(order = 1), linetype = guide_legend(order = 2)) + 
     #theme(legend.margin = unit(width, "cm")) + 
