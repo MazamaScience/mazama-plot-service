@@ -131,10 +131,6 @@ createDataList <- function(
     colnames(memoryData) <- c("datetime", "used")
   }
   
-  print(uptimeData)
-  print(memoryData)
-  print(diskData)
-  
   # ----- Create data structures -----------------------------------------------
   
   # Create dataList

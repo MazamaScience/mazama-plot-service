@@ -27,26 +27,24 @@ createProduct <- function(
   
   # ----- Get parameters -------------------------------------------------------
   
-  # Uptime data
-  uptimeData <- dataList$uptimeData
   serverid <- infoList$serverid
   ymax <- infoList$ymax
-  
   plotPath <- infoList$plotPath
   width <- infoList$width
   height <- infoList$height
   dpi <- infoList$dpi
   units <- infoList$units
   
-  # Memory data
+  uptimeData <- dataList$uptimeData
   memoryData <- dataList$memoryData
-  
-  # Disk data
   diskData <- dataList$diskData
+  
+  uptimeLoadThreshold <- 0.9
+  memoryUsedRatioThreshold <- 8.0
+  diskUsedThreshold   <- 0.9
   
   # ----- Create plot ----------------------------------------------------------
   
-  # TODO:  Clean up this debugging code. Shouldn't have "if (FALSE)" *inside* a function.
   # Determine what year(s) should be displayed on the x axis
   startYear <- as.integer(format(uptimeData[nrow(uptimeData),1][[1]], "%Y"))
   endYear <- as.integer(format(uptimeData[1,1][[1]], "%Y"))
@@ -69,15 +67,15 @@ createProduct <- function(
   # Get the data for the last hour
   uptimeData_lastHour <- tail(uptimeData, 5)
   memoryData_lastHour <- tail(memoryData, 5) %>% 
-    mutate(usedFreeRatio = used / free)
+    mutate(usedRatio = used / free)
   diskData_lastHour <- tail(diskData, 5)
   
   # Show an eye-catching red plot border if any of the uptime, memory, or disk 
   # data exceed a dangerous threshold
   border_color <- NULL
-  if (max(uptimeData_lastHour$load_15_min, na.rm = TRUE)   >= 0.9 ||
-      max(memoryData_lastHour$usedFreeRatio, na.rm = TRUE) >= 8.0 ||
-      max(diskData_lastHour$used, na.rm = TRUE)            >= 0.9) {
+  if (max(uptimeData_lastHour$load_15_min, na.rm = TRUE) >= uptimeLoadThreshold ||
+      max(memoryData_lastHour$usedRatio, na.rm = TRUE)   >= memoryUsedRatioThreshold ||
+      max(diskData_lastHour$used, na.rm = TRUE)          >= diskUsedThreshold) {
     border_color <- 'red'
   }
   
