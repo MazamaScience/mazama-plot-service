@@ -55,7 +55,8 @@ createProduct <- function(
     xLabel = paste0(startYear, "-", endYear)
   }
   
-  # Set uptime scale limit to 1.0 by default, max if the data exceeds 1, or to the value given by the user
+  # Set uptime scale limit to 1.0 by default, max if the data exceeds 1, or to 
+  # the value given by the user
   if (ymax < 0.02) {
     primary_y_lim = max(1.0, max(uptimeData$load_15_min) * 1.1)
   } else {
@@ -65,14 +66,18 @@ createProduct <- function(
   # Scale the memory axis so the total memory matches the height of the uptime axis
   scale_factor = max(memoryData$total, na.rm=TRUE) / primary_y_lim
   
-  uptimeData_lastHour <- tail(uptimeData$load_15_min, 4)
-  diskData_lastHour <- tail(diskData$used, 4)
+  # Get the data for the last hour
+  uptimeData_lastHour <- tail(uptimeData, 5)
+  memoryData_lastHour <- tail(memoryData, 5) %>% 
+    mutate(usedFreeRatio = used / free)
+  diskData_lastHour <- tail(diskData, 5)
   
+  # Show an eye-catching red plot border if any of the uptime, memory, or disk 
+  # data exceed a dangerous threshold
   border_color <- NULL
-  if (max(uptimeData_lastHour, na.rm = TRUE) >= 0.8) {
-    border_color <- 'red'
-  }
-  if (max(diskData_lastHour, na.rm = TRUE) >= 0.8) {
+  if (max(uptimeData_lastHour$load_15_min, na.rm = TRUE)   >= 0.9 ||
+      max(memoryData_lastHour$usedFreeRatio, na.rm = TRUE) >= 8.0 ||
+      max(diskData_lastHour$used, na.rm = TRUE)            >= 0.9) {
     border_color <- 'red'
   }
   
