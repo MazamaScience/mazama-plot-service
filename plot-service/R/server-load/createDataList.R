@@ -17,7 +17,7 @@ createDataList <- function(
   
   MazamaCoreUtils::stopIfNull(infoList)
   
-  # ----- Load data ------------------------------------------------------------
+  # ----- Load uptime data ------------------------------------------------------------
   
   # NOTE:  Need to watch out for reboots that change the number of commas
   #
@@ -78,9 +78,7 @@ createDataList <- function(
     colnames(uptimeData) <- c("datetime", "load_15_min")
   }
   
-  # ----- Validate data --------------------------------------------------------
-  
-  # ----- Load 'free -h' data --------------------------------------------------
+  # ----- Load free memory data --------------------------------------------------
   
   memoryData = NULL
   
@@ -106,12 +104,40 @@ createDataList <- function(
     colnames(memoryData) <- c("datetime", "total", "used")
   }
   
+  # ----- Load disk usage data -------------------------------------------------
+  
+  diskData  = NULL
+  
+  result <- try({
+    diskLogUrl <- paste0('https://', serverID, '/logs/disk_usage.log')
+    col_names <- c('datetime','dummy1','dummy2','dummy3','dummy4','used','dummy5')
+    diskData <- readr::read_fwf(
+      file = diskLogUrl,
+      col_positions = readr::fwf_empty(diskLogUrl, col_names = col_names),
+      col_types = "Tciiicc"
+    )
+    diskData$dummy <- NULL
+    diskData <-
+      diskData %>%
+      filter(datetime >= startDate)
+    diskData$used <- as.numeric(sub('%', '', diskData$used)) / 100
+  }, silent = TRUE)
+  
+  # Create dummy data to use if the memory log is unavailible 
+  if ("try-error" %in% class(result)) {
+    err_msg <- geterrmessage()
+    logger.trace(err_msg)
+    diskData <- data.frame(Sys.time(), 0)
+    colnames(memoryData) <- c("datetime", "used")
+  }
+  
   # ----- Create data structures -----------------------------------------------
   
   # Create dataList
   dataList <- list(
     uptimeData = uptimeData,
-    memoryData = memoryData
+    memoryData = memoryData,
+    diskData = diskData
   )
   
   return(dataList)
