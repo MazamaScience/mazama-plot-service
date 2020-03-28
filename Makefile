@@ -16,8 +16,8 @@
 # Test these settings with:    <CentOS equivalent of "sudo apache2ctl configtest">
 # Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
 
-# ---- . beakr 0.3 . ----
-VERSION=1.2.0
+# ---- . beakr 0.3 . warning threshold
+VERSION=1.2.1
 
 # NOTE:  The SERVICE_PATH should match that found in Dockerfile and Dockerfile-test
 SERVICE_PATH=plot-service/v1

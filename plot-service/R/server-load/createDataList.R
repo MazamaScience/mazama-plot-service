@@ -29,7 +29,7 @@ createDataList <- function(
   serverID <- infoList$serverid
   startDate <- MazamaCoreUtils::parseDatetime(infoList$startdate, timezone = "UTC")
 
-  uptimeData = NULL
+  loadData = NULL
   
   result <- try({
     uptimeLogUrl <- paste0('https://', serverID, '/logs/uptime.log')
@@ -52,20 +52,20 @@ createDataList <- function(
     loadString <- stringr::str_replace_all(loadString, " ", "")
     
     # Now reassemble a cleaned up, artificial CSV file 
-    fakeLines <- paste(datetimeString, usersString, loadString, sep=",")
+    fakeLines <- paste(datetimeString, usersString, loadString, sep = ",")
     # Omit any lines with "NA"
     fakeLines <- fakeLines[ !stringr::str_detect(fakeLines, "NA") ]
-    fakeFile <- paste(fakeLines, collapse="\n")
+    fakeFile <- paste(fakeLines, collapse = "\n")
     
-    uptimeData <- readr::read_csv(
+    loadData <- readr::read_csv(
       file = fakeFile,
       col_names = c('datetime', 'userCount', 'load_1_min', 'load_5_min', 'load_15_min'),
       col_types = "Tiddd"
     )
     
     # Use dplyr to filter
-    uptimeData <-
-      uptimeData %>%
+    loadData <-
+      loadData %>%
       filter(datetime >= startDate)
     
   }, silent = TRUE)
@@ -74,8 +74,8 @@ createDataList <- function(
   if ("try-error" %in% class(result)) {
     err_msg = geterrmessage()
     logger.trace(err_msg)
-    uptimeData <- data.frame(Sys.time(), 0)
-    colnames(uptimeData) <- c("datetime", "load_15_min")
+    loadData <- data.frame(Sys.time(), 0)
+    colnames(loadData) <- c("datetime", "load_15_min")
   }
   
   # ----- Load free memory data --------------------------------------------------
@@ -93,6 +93,8 @@ createDataList <- function(
     memoryData$dummy <- NULL
     memoryData <-
       memoryData %>%
+      # Add an "unavailable" column
+      mutate(unavailable = total - available) %>%
       filter(datetime >= startDate)
   }, silent = TRUE)
   
@@ -100,8 +102,8 @@ createDataList <- function(
   if ("try-error" %in% class(result)) {
     err_msg <- geterrmessage()
     logger.trace(err_msg)
-    memoryData <- data.frame(Sys.time(), 0, 0)
-    colnames(memoryData) <- c("datetime", "total", "used")
+    memoryData <- data.frame(Sys.time(), 0, 0, 0, 0, 0, 0, 0)
+    colnames(memoryData) <- c('datetime','dummy','total','used','free','shared','buff_cache','available')
   }
   
   # ----- Load disk usage data -------------------------------------------------
@@ -123,7 +125,7 @@ createDataList <- function(
     diskData$used <- as.numeric(sub('%', '', diskData$used)) / 100
   }, silent = TRUE)
   
-  # Create dummy data to use if the memory log is unavailible 
+  # Create dummy data to use if the usage log is unavailible 
   if ("try-error" %in% class(result)) {
     err_msg <- geterrmessage()
     logger.trace(err_msg)
@@ -135,7 +137,7 @@ createDataList <- function(
   
   # Create dataList
   dataList <- list(
-    uptimeData = uptimeData,
+    loadData = loadData,
     memoryData = memoryData,
     diskData = diskData
   )

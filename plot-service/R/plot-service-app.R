@@ -44,7 +44,8 @@ for (file in utilFiles) {
 
 # ----- Configure beakr --------------------------------------------------------
 
-VERSION <- "1.1.0"
+# ---- . beakr 0.3 . warning threshold
+VERSION <- "1.2.1"
 
 # Set up configurable variables
 
