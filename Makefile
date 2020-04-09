@@ -13,8 +13,11 @@
 # ProxyPass /plot-service/test http://127.0.0.1:6009/plot-service/test
 # ProxyPassReverse /plot-service/test http://127.0.0.1:6009/plot-service/test
 #
-# Test these settings with:    <CentOS equivalent of "sudo apache2ctl configtest">
-# Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
+# Test these settings with:    <Ubuntu: "sudo apache2ctl configtest">
+# Reload these settings with:  <Ubuntu: "sudo service apache2 reload">
+# 
+# Test these settings with:    <CentOS: "sudo apachectl configtest">
+# Reload these settings with:  <CentOS: "sudo apachectl graceful">
 
 # ---- . beakr 0.3 . warning threshold
 VERSION=1.2.1
