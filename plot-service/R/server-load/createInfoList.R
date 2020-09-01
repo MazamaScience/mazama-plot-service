@@ -75,6 +75,12 @@ createInfoList <- function(
   
   # ----- Create uniqueID based on parameters that affect the presentation -----
   
+  # Update timestamp once every 5 minutes to guarantee plenty of cache hits
+  timestamp <-
+    lubridate::now(tzone = "UTC") %>%
+    lubridate::floor_date("5 mins") %>%
+    strftime("%Y%m%d%H%M")
+    
   # TODO: handle creating unique plots for shorter time intervals
   uniqueList <- list(
     infoList$language,
@@ -85,7 +91,8 @@ createInfoList <- function(
     infoList$serverid,
     infoList$ymax,
     infoList$lookbackdays,
-    strftime(lubridate::now(tzone = "UTC"), "%Y-%m-%d %H:%M"))
+    timestamp
+  )
   
   infoList$uniqueID <- digest::digest(uniqueList, algo = "md5")
   
