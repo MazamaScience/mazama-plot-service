@@ -97,6 +97,10 @@ test_reboot: test_build test_down test_up
 
 # ----- PRODUCTION version -----------------------------------------------------
 
+production_install_dashboards:
+	cp html/dashboards/server-health-dashboard.html /var/www/tools.mazamascience.com/html/
+	cp html/dashboards/server-health-tools.html /var/www/tools.mazamascience.com/html/
+
 production_build:
 	-mkdir plot-service/output
 	cd ./plot-service; docker build -t plot-service-v1:$(VERSION) -t plot-service-v1:latest -f Dockerfile-v1 .
