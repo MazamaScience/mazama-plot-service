@@ -164,7 +164,7 @@
         <div class="row justify-content-center">
           <div class="col-4">
             <div class="thumbnail server-group-tools-c">
-              <p class="server-title">tools-c5</p>
+              <p class="server-title">tools-c9 plot</p>
               <img class="server-plot"
                    src="#"
                    alt="tools-c5 plot"
@@ -204,38 +204,38 @@
         
         <div class="row justify-content-center">
           <div class="col-4">
-            <div class="thumbnail server-group-monitoring">
-              <p class="server-title">data-monitoring1</p>
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c8 plot</p>
               <img class="server-plot"
                    src="#"
-                   alt="data-monitoring1 plot"
+                   alt="tools-c8 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://data-monitoring1.airfire.org/monitoring/monitoring-status.html"
+              <a href="https://tools-c8.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
           <div class="col-4">
-            <div class="thumbnail server-group-monitoring">
-              <p class="server-title">data-monitoring2</p>
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c9 plot</p>
               <img class="server-plot"
                    src="#"
-                   alt="data-monitoring2 plot"
+                   alt="tools-c9 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://data-monitoring2.airfire.org/monitoring/monitoring-status.html"
+              <a href="https://tools-c9.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
           <div class="col-4">
-            <div class="thumbnail server-group-data-c">
-              <p class="server-title">data-c1</p>
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c10 plot</p>
               <img class="server-plot"
                    src="#"
-                   alt="data-c1 plot"
+                   alt="tools-c10 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://data-c1.airfire.org/logs/"
+              <a href="https://tools-c10.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
@@ -245,38 +245,38 @@
         
         <div class="row justify-content-center">
           <div class="col-4">
-            <div class="thumbnail server-group-purpleair">
-              <p class="server-title">data-purpleair1</p>
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c11 plot</p>
               <img class="server-plot"
                    src="#"
-                   alt="data-purpleair1 plot"
+                   alt="tools-c11 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://data-purpleair1.airfire.org/PurpleAir/v1/logs/"
+              <a href="https://tools-c11.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
           <div class="col-4">
-            <div class="thumbnail server-group-purpleair">
-              <p class="server-title">data-purpleair2</p>
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c12 plot</p>
               <img class="server-plot"
                    src="#"
-                   alt="data-purpleair2 plot"
+                   alt="tools-c12 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://data-purpleair2.airfire.org/PurpleAir/v1/logs/"
+              <a href="https://tools-c12.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
           <div class="col-4">
-            <div class="thumbnail server-group-data-c">
-              <p class="server-title">data-c2</p>
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c13 plot</p>
               <img class="server-plot"
                    src="#"
-                   alt="data-c2 plot"
+                   alt="tools-c13 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://data-c2.airfire.org/logs/"
+              <a href="https://tools-c13.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
@@ -313,14 +313,14 @@
         "tools-c5.airfire.org",
         "tools-c6.airfire.org",
         "tools-c7.airfire.org",
-        // ----- Row 3 -----
-        "data-monitoring1.airfire.org",
-        "data-monitoring2.airfire.org",
-        "data-c1.airfire.org",
+        // ----- Row 3 -----        
+        "tools-c9.airfire.org",
+        "tools-c9.airfire.org",
+        "tools-c10.airfire.org",
         // ----- Row 4 -----
-        "data-purpleair1.airfire.org",
-        "data-purpleair2.airfire.org",
-        "data-c2.airfire.org"
+        "tools-c11.airfire.org",
+        "tools-c12.airfire.org",
+        "tools-c13.airfire.org"
       ];
 
       let serverGallery = $("#server-plot-gallery");
@@ -348,7 +348,7 @@
         // Updates the server plot image
         let serverplotImg = serverCell.find("img")[0];
         serverplotImg.src = "http://tools.mazamascience.com/plot-service/v1/server-load?serverid="
-          + serverName + "&lookbackdays=1&ymax=2&t=" + Date.now(); // Unique 't' parameter forces reload
+          + serverName + "&lookbackdays=4&ymax=4&t=" + Date.now(); // Unique 't' parameter forces reload
 
         // Updates the server "last updated" label
         let serverLastUpdatedLabel = serverCell.find(".last-updated-label")[0];
