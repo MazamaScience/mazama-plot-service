@@ -22,15 +22,13 @@ RUN R --vanilla -e 'update.packages(repos="https://cran.rstudio.com", oldPkgs="h
 
 # Install latest development versions of packages
 RUN installGithub.r \
-    MazamaScience/MazamaCoreUtils \
-    MazamaScience/beakr
+    MazamaScience/MazamaCoreUtils@main \
+    MazamaScience/beakr@main
 
 #######################################################################
 # beakr instance configuration
 #
-# On joule, ProxypPass settings are defined in:
-#
-#   /etc/httpd/conf.d/tools.mazamascience.com.conf
+# ProxypPass settings are be defined in: /etc/apache2/sites-available/default-ssl.conf
 #
 # # 6000-6009 plot-service -----------------------------------------------------
 # # 6001 -- v1 operational
@@ -40,8 +38,8 @@ RUN installGithub.r \
 # ProxyPass /plot-service/test http://127.0.0.1:6009/plot-service/test
 # ProxyPassReverse /plot-service/test http://127.0.0.1:6009/plot-service/test
 #
-# Test these settings with:    <CentOS equivalent of "sudo apache2ctl configtest">
-# Reload these settings with:  <CentOS equivalent of "sudo service apache2 reload">
+# Test these settings with:    sudo apache2ctl configtest
+# Reload these settings with:  sudo service apache2 reload
 #
 # The block of ports 6000-6009 is reserved for the 'plot-service' service
 ENV BEAKR_HOST 0.0.0.0

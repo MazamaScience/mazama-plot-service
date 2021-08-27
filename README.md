@@ -58,7 +58,7 @@ Inside RStudio you can run the app with:
 
 The app will be available at:
 
-[localhost:8080/plot-service/dev/](localhost:8080/plot-service/dev/)
+[localhost:8080/plot-service/test/](localhost:8080/plot-service/test/)
 
 ## Running the app with Docker ##
 
@@ -99,10 +99,10 @@ On AWS instances, ProxyPass settings are defined in:
 You can ask to see the `api` by hitting the service with no sub-service
 specified:
 
-[http://localhost:8080/plot-service/dev](http://localhost:8080/plot-service/dev)
+[http://localhost:8080/plot-service/test](http://localhost:8080/plot-service/test)
 
 You can ask for a `plot`:
 
-[http://localhost:8080/plot-service/dev/server-load?serverid=joule.mazamascience.com](http://localhost:8080/plot-service/dev/server-load?serverid=joule.mazamascience.com)
+[http://localhost:8080/plot-service/test/server-load?serverid=joule.mazamascience.com](http://localhost:8080/plot-service/test/server-load?serverid=joule.mazamascience.com)
 
 ***
