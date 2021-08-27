@@ -19,8 +19,8 @@
 # Test these settings with:    <CentOS: "sudo apachectl configtest">
 # Reload these settings with:  <CentOS: "sudo apachectl graceful">
 
-# ---- . beakr 0.3 . warning threshold
-VERSION=1.2.1
+# ---- . beakr 0.3 . fixed parsing bugs
+VERSION=1.2.2
 
 # NOTE:  The SERVICE_PATH should match that found in Dockerfile and Dockerfile-test
 SERVICE_PATH=plot-service/v1
