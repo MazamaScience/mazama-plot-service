@@ -349,7 +349,7 @@
 
         // Updates the server plot image
         let serverplotImg = serverCell.find("img")[0];
-        serverplotImg.src = "http://tools.mazamascience.com/plot-service/v1/server-load?serverid="
+        serverplotImg.src = "http://tools-internal.airfire.org/plot-service/v1/server-load?serverid="
           + serverName + "&lookbackdays=1&ymax=2&t=" + Date.now(); // Unique 't' parameter forces reload
 
         // Updates the server "last updated" label
