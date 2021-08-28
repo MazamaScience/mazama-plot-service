@@ -1,9 +1,7 @@
 ################################################################################
 # Makefile for building and running docker containers
 #
-# On joule, ProxypPass settings are defined in:
-#
-#   /etc/httpd/conf.d/tools.mazamascience.com.conf
+# ProxyPass settings are defined in:  /etc/apache2/sites-enabled/default-ssl.conf
 #
 # # 6000-6009 plot-service -----------------------------------------------------
 # # 6001 -- v1 operational
@@ -13,11 +11,8 @@
 # ProxyPass /plot-service/test http://127.0.0.1:6009/plot-service/test
 # ProxyPassReverse /plot-service/test http://127.0.0.1:6009/plot-service/test
 #
-# Test these settings with:    <Ubuntu: "sudo apache2ctl configtest">
-# Reload these settings with:  <Ubuntu: "sudo service apache2 reload">
-# 
-# Test these settings with:    <CentOS: "sudo apachectl configtest">
-# Reload these settings with:  <CentOS: "sudo apachectl graceful">
+# Test these settings with:    sudo apache2ctl configtest
+# Reload these settings with:  sudo service apache2 reload
 
 # ---- . beakr 0.3 . fixed parsing bugs
 VERSION=1.2.2
