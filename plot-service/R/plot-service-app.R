@@ -44,8 +44,8 @@ for (file in utilFiles) {
 
 # ----- Configure beakr --------------------------------------------------------
 
-# ---- . beakr 0.3 . fixed parsing bugs
-VERSION <- "1.2.2"
+# ---- . beakr 0.3 . moved dashboards under plot-service/
+VERSION <- "1.2.3"
 
 # Set up configurable variables
 
