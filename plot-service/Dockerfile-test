@@ -68,6 +68,7 @@ ENV LOG_DIR /app/logs
 WORKDIR /app
 
 # beakr app and all associated files
+COPY dashboard /app/dashboard
 COPY output /app/output
 COPY R /app/R
 
