@@ -5,3 +5,4 @@
 *.Rproj
 plot-service/logs/*
 plot-service/output/*
+.DS_Store
