@@ -62,10 +62,10 @@ if ( interactive() ) { # Running from RStudio
   # directories for log output, data, and cache
   DATA_DIR <- file.path(getwd(), "data")
   if ( !file.exists(DATA_DIR) ) dir.create(DATA_DIR)
-  
+
   LOG_DIR <- file.path(getwd(), "logs")
   if ( !file.exists(LOG_DIR) ) dir.create(LOG_DIR)
-  
+
   CACHE_DIR <- file.path(getwd(), "output")
   if ( !file.exists(CACHE_DIR) ) dir.create(CACHE_DIR)
 
@@ -115,12 +115,12 @@ logger.debug('LOG_DIR = %s', LOG_DIR)
 
 # ----- BEGIN beakr app --------------------------------------------------------
 
-newBeakr() %>%
-  
+beakr::newBeakr() %>%
+
   # ----- Root URL-- show API --------------------------------------------------
 
   # regex matches zero or one final '/'
-  httpGET(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
+  beakr::httpGET(paste0("/", SERVICE_PATH, "/?$"), function(req, res, err) {
 
     logger.info("----- %s -----", req$path)
 
@@ -137,7 +137,7 @@ newBeakr() %>%
   # ----- Show API -------------------------------------------------------------
 
   # regex ignores capitalization and matches zero or one final '/'
-  httpGET(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
+  beakr::httpGET(paste0("/", SERVICE_PATH, "/[Aa][Pp][Ii]/?$"), function(req, res, err) {
 
     logger.info("----- %s -----", req$path)
 
@@ -153,7 +153,7 @@ newBeakr() %>%
   }) %>%
 
   # ----- Create products ------------------------------------------------------
-  # 
+  #
   # NOTE:  All subservices are handled the same way. Each has a subdirectory
   # NOTE:  with files that define the following top-level functions:
   # NOTE:   * createDataList
@@ -165,7 +165,7 @@ newBeakr() %>%
   # NOTE:  run for every custom product.
 
   # regex matches alphanumerics and zero or one final '/'
-  httpGET(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
+  beakr::httpGET(paste0("/", SERVICE_PATH, "/[a-zA-Z0-9-]+/?"), function(req, res, err) {
 
     # Extract lowercase subservice name
     subservice <-
@@ -186,13 +186,13 @@ newBeakr() %>%
       source(dataListScript)        # function to load data required by product
       source(productScript)         # function to create product
     }, silent = TRUE)
-    stopOnError(result)
+    MazamaCoreUtils::stopOnError(result)
 
     # Create infoList
     result <- try({
       infoList <- createInfoList(req, CACHE_DIR)
     }, silent = TRUE)
-    stopOnError(result)
+    MazamaCoreUtils::stopOnError(result)
 
     # Create a new plot file if it isn't in the cache
     if ( !file.exists(infoList$plotPath) ) {
@@ -218,7 +218,7 @@ newBeakr() %>%
         logger.info("successfully created %s", infoList$plotPath)
 
       }, silent = TRUE)
-      stopOnError(result)
+      MazamaCoreUtils::stopOnError(result)
 
     } # finished creating product file
 
@@ -245,7 +245,7 @@ newBeakr() %>%
         logger.info("successfully created %s", infoList$jsonPath)
 
       }, silent = TRUE)
-      stopOnError(result)
+      MazamaCoreUtils::stopOnError(result)
 
     } # finished creating json file
 
@@ -276,20 +276,20 @@ newBeakr() %>%
       }
 
     }, silent = TRUE)
-    stopOnError(result)
+    MazamaCoreUtils::stopOnError(result)
 
   }) %>%
 
   # ----- Serve static files ---------------------------------------------------
 
-  serveStaticFiles(SERVICE_PATH) %>%
+  beakr::serveStaticFiles(SERVICE_PATH) %>%
 
   # ----- Handle errors  -------------------------------------------------------
 
-  handleErrors() %>%
+  beakr::handleErrors() %>%
 
   # ----- Return ---------------------------------------------------------------
 
-  listen(host = BEAKR_HOST, port = as.integer(BEAKR_PORT))
+  beakr::listen(host = BEAKR_HOST, port = as.integer(BEAKR_PORT))
 
 
