@@ -135,10 +135,13 @@ createDataList <- function(
     col_names <- c('datetime','dummy1','dummy2','dummy3','dummy4','used')
     diskData <- readr::read_fwf(
       file = diskLogUrl,
-      col_positions = readr::fwf_empty(diskLogUrl, col_names = col_names),
+      col_positions = readr::fwf_positions(
+        start = c(1,27,38,52,61,71),
+        end = c(25,36,50,59,69,NA),
+        col_names = col_names
+      ),
       col_types = "Tciiic"
     )
-    diskData$dummy <- NULL
     diskData <-
       diskData %>%
       filter(datetime >= startDate)

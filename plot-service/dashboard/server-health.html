@@ -70,24 +70,20 @@
         background-color: darkseagreen;
       }
 
-      .server-group-test-c {
-        background-color: lightgray;
-      }
-
-      .server-group-data-c {
-        background-color: skyblue;
+      .server-group-tools-internal {
+        background-color: thistle;
       }
 
       .server-group-fires-c {
-        background-color: indianred;
+        background-color: skyblue;
+      }
+
+      .server-group-data-c {
+        background-color: navajowhite;
       }
 
       .server-group-monitoring {
         background-color: lightsalmon;
-      }
-
-      .server-group-purpleair {
-        background-color: thistle;
       }
 
       p.server-title {
@@ -106,7 +102,7 @@
     <header>
       <div class="container-fluid">
         <div class="row justify-content-between align-items-center">
-          <h1>Server Health -- AirFire AWS tools-c#</h1>
+          <h1>Server Health -- AirFire AWS instances</h1>
           <img src="http://mazamascience.com/assets/logo-footer.svg"
                alt="Mazama Science logo"
                width="160px">
@@ -121,7 +117,19 @@
         <!-- NEW ROW ---------------------------------------------------------->
         
         <div class="row justify-content-center">
-          <div class="col-4">
+          <div class="col-3">
+            <div class="thumbnail server-group-tools-c">
+              <p class="server-title">tools-c1</p>
+              <img class="server-plot"
+                   src="#"
+                   alt="tools-c1 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
+              <p class="last-updated-label"></p>
+              <a href="https://tools-c1.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-3">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c2</p>
               <img class="server-plot"
@@ -133,7 +141,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c3</p>
               <img class="server-plot"
@@ -145,7 +153,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c4</p>
               <img class="server-plot"
@@ -160,62 +168,62 @@
         </div>
 
         <!-- NEW ROW ---------------------------------------------------------->
-<!--        
+        
         <div class="row justify-content-center">
-          <div class="col-4">
-            <div class="thumbnail server-group-tools-c">
-              <p class="server-title">tools-c5</p>
+          <div class="col-3">
+            <div class="thumbnail server-group-tools-internal">
+              <p class="server-title">test-c1</p>
               <img class="server-plot"
                    src="#"
-                   alt="tools-c5 plot"
+                   alt="test-c1 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://tools-c5.airfire.org/logs/"
+              <a href="https://test-c1.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-4">
-            <div class="thumbnail server-group-tools-c">
-              <p class="server-title">tools-c6</p>
+          <div class="col-3">
+            <div class="thumbnail server-group-tools-internal">
+              <p class="server-title">tools-internal</p>
               <img class="server-plot"
                    src="#"
-                   alt="tools-c6 plot"
+                   alt="tools-internal plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://tools-c6.airfire.org/logs/"
+              <a href="https://tools-internal-c1.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-4">
-            <div class="thumbnail server-group-tools-c">
-              <p class="server-title">tools-c7</p>
+          <div class="col-3">
+            <div class="thumbnail server-group-fires-c">
+              <p class="server-title">fires-c1</p>
               <img class="server-plot"
                    src="#"
-                   alt="tools-c7 plot"
+                   alt="fires-c1 plot"
                    data-toggle="modal" data-target="#server-plot-modal">
               <p class="last-updated-label"></p>
-              <a href="https://tools-c7.airfire.org/logs/"
+              <a href="https://fires-c1.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="thumbnail server-group-fires-c">
+              <p class="server-title">fires-c2</p>
+              <img class="server-plot"
+                   src="#"
+                   alt="fires-c2 plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
+              <p class="last-updated-label"></p>
+              <a href="https://fires-c2.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
           </div>
         </div>
--->
+
         <!-- NEW ROW ---------------------------------------------------------->
         
         <div class="row justify-content-center">
-          <div class="col-4">
-            <div class="thumbnail server-group-tools-c">
-              <p class="server-title">tools-c1</p>
-              <img class="server-plot"
-                   src="#"
-                   alt="tools-c1 plot"
-                   data-toggle="modal" data-target="#server-plot-modal">
-              <p class="last-updated-label"></p>
-              <a href="https://tools-c1.airfire.org/logs/"
-                 target="_blank">Logs</a>
-            </div>
-          </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">data-c1</p>
               <img class="server-plot"
@@ -227,7 +235,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">data-c2</p>
               <img class="server-plot"
@@ -239,24 +247,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-        </div>
-
-        <!-- NEW ROW ---------------------------------------------------------->
-        
-        <div class="row justify-content-center">
-          <div class="col-4">
-            <div class="thumbnail server-group-purpleair">
-              <p class="server-title">data-purpleair1</p>
-              <img class="server-plot"
-                   src="#"
-                   alt="data-purpleair plot"
-                   data-toggle="modal" data-target="#server-plot-modal">
-              <p class="last-updated-label"></p>
-              <a href="https://data-purpleair1.airfire.org/logs/"
-                 target="_blank">Logs</a>
-            </div>
-          </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="thumbnail server-group-monitoring">
               <p class="server-title">data-monitoring1</p>
               <img class="server-plot"
@@ -268,7 +259,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <div class="thumbnail server-group-monitoring">
               <p class="server-title">data-monitoring2</p>
               <img class="server-plot"
@@ -306,21 +297,24 @@
       // Define these one row at a time so they get assigned properly
       let servers = [
         // ----- Row 1 -----
+        "tools-c1.airfire.org",
         "tools-c2.airfire.org",
         "tools-c3.airfire.org",
         "tools-c4.airfire.org",
         // ----- Row 2 -----
-        // "tools-c5.airfire.org",
-        // "tools-c6.airfire.org",
-        // "tools-c7.airfire.org",
-        // ----- Row 3 -----        
-        "tools-c1.airfire.org",
         "data-c1.airfire.org",
         "data-c2.airfire.org",
-        // ----- Row 4 -----
-        "data-purpleair1.airfire.org",
         "data-monitoring1.airfire.org",
         "data-monitoring2.airfire.org"
+        // ----- Row 3 -----        
+        "test-c1.airfire.org",
+        "tools-internal-c1.airfire.org",
+        "fires-c1.airfire.org",
+        "fires-c2.airfire.org"
+        // ----- Row 4 -----
+        // "data-purpleair1.airfire.org",
+        // "data-monitoring1.airfire.org",
+        // "data-monitoring2.airfire.org"
       ];
 
       let serverGallery = $("#server-plot-gallery");
