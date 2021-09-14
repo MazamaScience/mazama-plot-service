@@ -24,6 +24,7 @@ SERVICE_PATH_TEST=plot-service/test
 # ----- TESTING ----------------------------------------------------------------
  
 clean:
+	-rm -rf logs
 	-rm -rf plot-service/data
 	-rm -rf plot-service/logs
 	-rm -rf plot-service/output
