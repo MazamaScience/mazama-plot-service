@@ -112,6 +112,32 @@
 
     <main>
 
+      <div id="button-row" class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            y-max = 
+            <!-- See:  https://mdbootstrap.com/docs/b4/jquery/forms/radio-button/ -->
+            <!-- NOTE:  this is fancier than it needs to be. -->
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" id="ymax1" name="ymax" value="1"checked>
+              <label class="custom-control-label" for="ymax1">1</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" id="ymax2" name="ymax" value="2"checked>
+              <label class="custom-control-label" for="ymax2">2</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" id="ymax4" value="4" name="ymax">
+              <label class="custom-control-label" for="ymax4">4</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" class="custom-control-input" id="ymax8" value="8" name="ymax">
+              <label class="custom-control-label" for="ymax8">8</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="server-plot-gallery" class="container-fluid">
 
         <!-- ROW 1 ---------------------------------------------------------->
@@ -343,11 +369,12 @@
       function updateServerplot(serverIndex) {
         let serverCell = $(serverCells[serverIndex]);
         let serverName = servers[serverIndex];
+        let ymax = document.querySelector('input[name="ymax"]:checked').value;
 
         // Updates the server plot image
         let serverplotImg = serverCell.find("img")[0];
         serverplotImg.src = "http://tools-internal.airfire.org/plot-service/v1/server-load?serverid="
-          + serverName + "&lookbackdays=4&ymax=4&t=" + Date.now(); // Unique 't' parameter forces reload
+          + serverName + "&lookbackdays=4&ymax=" + ymax + "&t=" + Date.now(); // Unique 't' parameter forces reload
 
         // Updates the server "last updated" label
         let serverLastUpdatedLabel = serverCell.find(".last-updated-label")[0];
