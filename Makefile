@@ -94,8 +94,7 @@ test_reboot: test_build test_down test_up
 # ----- PRODUCTION version -----------------------------------------------------
 
 production_install_dashboards:
-	cp html/dashboards/server-health-dashboard.html /var/www/tools.mazamascience.com/html/
-	cp html/dashboards/server-health-tools.html /var/www/tools.mazamascience.com/html/
+	cp plot-service/dashboard/server-health.html /var/www/tools.mazamascience.com/html/
 
 production_build:
 	-mkdir plot-service/output
