@@ -37,6 +37,11 @@ createInfoList <- function(
 
   # Set defaults
   infoList$serverprotocol <- tolower(ifelse(is.null(infoList$serverprotocol), "https", infoList$serverprotocol))
+
+  # TODO:  Remove serverProtocol HACK
+  if ( serverID %in% c("data-monitoring_v2-c1.airfire.org") )
+    infoList$serverprotocol <- "http"
+
   infoList$serverid <- tolower(infoList$serverid)
   # NOTE:  During plotting, ymax will take the maximum of the data maximum or infoList$ymax
   # NOTE:  We default to a small number so that data maximum will be used unless the users specifies something larger
@@ -117,8 +122,9 @@ if ( FALSE ) {
 
   req <- list(
     parameters = list(
-      serverid = "joule.mazamascience.com",
-      lookbackdays = "3"
+      serverid = "data-monitoring_v2-c1.airfire.org",
+      lookbackdays = "4",
+      ymax = 2
     )
   )
 
