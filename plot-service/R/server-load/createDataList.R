@@ -30,12 +30,6 @@ createDataList <- function(
   serverID <- infoList$serverid
   startDate <- MazamaCoreUtils::parseDatetime(infoList$startdate, timezone = "UTC")
 
-  ignoredIDs <- c( "tools-c12.airfire.org", "tools-c13.airfire.org")
-
-  if ( serverID %in% ignoredIDs ) {
-    stop(sprintf("ServerID %s is being ignored", serverID))
-  }
-
   loadData = NULL
 
   result <- try({
