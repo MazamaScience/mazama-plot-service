@@ -14,8 +14,8 @@
 # Test these settings with:    sudo apache2ctl configtest
 # Reload these settings with:  sudo service apache2 reload
 
-# ---- . beakr 0.3 . improved parsing and dashboard layout
-VERSION=1.2.4
+# ---- . beakr 0.3 . updated tools-internal url
+VERSION=1.2.5
 
 # NOTE:  The SERVICE_PATH should match that found in Dockerfile and Dockerfile-test
 SERVICE_PATH=plot-service/v1

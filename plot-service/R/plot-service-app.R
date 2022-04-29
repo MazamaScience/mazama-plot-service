@@ -44,8 +44,8 @@ for (file in utilFiles) {
 
 # ----- Configure beakr --------------------------------------------------------
 
-# ---- . beakr 0.3 . improved parsing and dashboard layout
-VERSION <- "1.2.4"
+# ---- . beakr 0.3 . updated tools-internal url
+VERSION <- "1.2.5"
 
 # Set up configurable variables
 
