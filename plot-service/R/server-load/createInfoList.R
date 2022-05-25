@@ -40,7 +40,12 @@ createInfoList <- function(
   infoList$serverid <- tolower(infoList$serverid)
 
   # TODO:  Remove serverProtocol HACK
-  if ( infoList$serverid %in% c("data-monitoring_v2-c1.airfire.org") )
+  http_servers <- c(
+    "data-monitoring_v2-c1.airfire.org",
+    "data-monitoring_v2-c2.airfire.org"
+  )
+
+  if ( infoList$serverid %in% http_servers )
     infoList$serverprotocol <- "http"
 
   # NOTE:  During plotting, ymax will take the maximum of the data maximum or infoList$ymax
