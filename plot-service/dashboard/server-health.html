@@ -82,12 +82,12 @@
         background-color: navajowhite;
       }
 
-      .server-group-monitoring {
+      .server-group-other {
         background-color: lightsalmon;
       }
 
       p.server-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: bold;
       }
 
@@ -115,7 +115,7 @@
       <div id="button-row" class="container-fluid">
         <div class="row">
           <div class="col-12">
-            y-max = 
+            y-max =
             <!-- See:  https://mdbootstrap.com/docs/b4/jquery/forms/radio-button/ -->
             <!-- NOTE:  this is fancier than it needs to be. -->
             <div class="custom-control custom-radio custom-control-inline">
@@ -141,9 +141,9 @@
       <div id="server-plot-gallery" class="container-fluid">
 
         <!-- ROW 1 ---------------------------------------------------------->
-        
+
         <div class="row justify-content-center">
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c1</p>
               <img class="server-plot"
@@ -155,7 +155,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c2</p>
               <img class="server-plot"
@@ -167,7 +167,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-tools-c">
               <p class="server-title">tools-c3</p>
               <img class="server-plot"
@@ -179,17 +179,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
-            <div>
-              <p>&nbsp;</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROW 2 ---------------------------------------------------------->
-        
-        <div class="row justify-content-center">
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-tools-internal">
               <p class="server-title">test-c1</p>
               <img class="server-plot"
@@ -201,7 +191,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-tools-internal">
               <p class="server-title">tools-internal</p>
               <img class="server-plot"
@@ -213,7 +203,17 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 2 ---------------------------------------------------------->
+
+        <div class="row justify-content-center">
+          <div class="col-2">
             <div class="thumbnail server-group-fires-c">
               <p class="server-title">fires-c1</p>
               <img class="server-plot"
@@ -225,7 +225,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-fires-c">
               <p class="server-title">fires-c2</p>
               <img class="server-plot"
@@ -237,12 +237,46 @@
                  target="_blank">Logs</a>
             </div>
           </div>
+          <div class="col-2">
+            <div class="thumbnail server-group-other">
+              <p class="server-title">near-me</p>
+              <img class="server-plot"
+                   src="#"
+                   alt="near-me plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
+              <p class="last-updated-label"></p>
+              <a href="https://near-me.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="thumbnail server-group-other">
+              <p class="server-title">crisis strategy</p>
+              <img class="server-plot"
+                   src="#"
+                   alt="wcs plot"
+                   data-toggle="modal" data-target="#server-plot-modal">
+              <p class="last-updated-label"></p>
+              <a href="https://wcs.airfire.org/logs/"
+                 target="_blank">Logs</a>
+            </div>
+          </div>
+          <div class="col-2">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+          </div>
+          <div class="col-2">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+          </div>
         </div>
 
         <!-- ROW 3 ---------------------------------------------------------->
-        
+
         <div class="row justify-content-center">
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">data-c1</p>
               <img class="server-plot"
@@ -254,7 +288,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">data-c2</p>
               <img class="server-plot"
@@ -266,23 +300,8 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
-            <div>
-              <p>&nbsp;</p>
-            </div>
-          </div>
-          <div class="col-3">
-            <div>
-              <p>&nbsp;</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROW 4 ---------------------------------------------------------->
-        
-        <div class="row justify-content-center">
-          <div class="col-3">
-            <div class="thumbnail server-group-monitoring">
+          <div class="col-2">
+            <div class="thumbnail server-group-data-c">
               <p class="server-title">data-monitoring1</p>
               <img class="server-plot"
                    src="#"
@@ -293,8 +312,8 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
-            <div class="thumbnail server-group-monitoring">
+          <div class="col-2">
+            <div class="thumbnail server-group-data-c">
               <p class="server-title">data-monitoring2</p>
               <img class="server-plot"
                    src="#"
@@ -305,7 +324,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">monitoring_v2-c1</p>
               <img class="server-plot"
@@ -317,7 +336,7 @@
                  target="_blank">Logs</a>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <div class="thumbnail server-group-data-c">
               <p class="server-title">monitoring_v2-c2</p>
               <img class="server-plot"
@@ -328,8 +347,12 @@
               <a href="http://data-monitoring_v2-c2.airfire.org/logs/"
                  target="_blank">Logs</a>
             </div>
-          </div>
+          <div class="col-2">
+        </div>
 
+
+      </div>
+        </div>
 
       </div> <!-- END of server-plot-gallery -->
 
@@ -358,15 +381,16 @@
         "tools-c1.airfire.org",
         "tools-c2.airfire.org",
         "tools-c3.airfire.org",
-        // ----- Row 2 -----
         "test-c1.airfire.org",
         "tools-internal.airfire.org",
+        // ----- Row 2 -----
         "fires-c1.airfire.org",
         "fires-c2.airfire.org",
-        // ----- Row 3 -----        
+        "near-me.airfire.org",
+        "wcs.airfire.org",
+        // ----- Row 3 -----
         "data-c1.airfire.org",
         "data-c2.airfire.org",
-        // ----- Row 4 -----
         "data-monitoring1.airfire.org",
         "data-monitoring2.airfire.org",
         "data-monitoring_v2-c1.airfire.org",
